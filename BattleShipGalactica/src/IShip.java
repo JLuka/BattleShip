@@ -1,0 +1,18 @@
+
+public interface IShip {
+	public int getReloadTimeLeft();
+	public void setReloadTimeLeft(int reloadTimeLeft);
+	public boolean isReady();
+	public void setReady(boolean isReady);
+	public int getReloadTime();
+	public void setReloadTime(int reloadTime);
+	public int getShootArea();
+	public void setShootArea(int shootArea);
+	public int getShipSize();
+	public void setShipSize(int shipSize);
+	public int[][] getCoordinates();
+	public void setCoordinates(int[][] coordinates);
+	public void setCoordinatesIfHitted(int x, int y);
+	public boolean checkIfIsSwimming();
+	
+}

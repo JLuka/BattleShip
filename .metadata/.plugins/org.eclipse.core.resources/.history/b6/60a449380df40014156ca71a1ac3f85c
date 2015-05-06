@@ -1,0 +1,5 @@
+
+public interface IShip {
+	public int getReloadTimeLeft();
+	public void setReloadTimeLeft(int reloadTimeLeft);
+}

@@ -1,0 +1,33 @@
+
+public interface IPlayer {
+	public boolean getIsActive();
+	public boolean getIsAlive();
+	public int getTotalShips();
+	public void setTotalShips(int totalShips);
+	public int getDestroyerInt();
+	public void setDestroyer(int destroyerInt);
+	public void setDestroyerIsntReady();
+	public void reloadTimeCountdown();
+	public int getFrigateInt();
+	public void setFrigate(int frigateInt);
+	public void setFrigateIsntReady();
+	public int getCorvetteInt();
+	public void setCorvette(int corvetteInt);
+	public void setCorvetteIsntReady();
+	public int getSubmarineInt();
+	public void setSubmarine(int submarineInt);
+	public void setSubmarineIsntReady();
+	public String getPlayerName();
+	public void setPlayerName(String playerName);
+	public void setActive(boolean isActive);
+	public void setAlive(boolean isAlive);
+	public field getOpenField();
+	public field getField();
+	public void setField(field field);
+	public void setOpenField(field openField);
+	public boolean isAvailable(int whichShip);
+	public void saveShipCoordinatesH(int x, int y, int length, int shipNumber);
+	public void saveShipCoordinatesV(int x, int y, int length, int shipNumber);
+	public boolean checkIfSunk(int x, int y, String shipSymbol);
+	public boolean checkIfAnyShipIsReady();
+}

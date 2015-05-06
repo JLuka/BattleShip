@@ -1,0 +1,61 @@
+
+public interface IShip {
+	public int getReloadTimeLeft();
+	public void setReloadTimeLeft(int reloadTimeLeft);
+	public boolean isReady();
+	public void setReady(boolean isReady);
+	public int getReloadTime();
+	public void setReloadTime(int reloadTime);
+	public int getShootArea();
+	public void setShootArea(int shootArea);
+	public int getShipSize();
+	
+	public void setShipSize(int shipSize);
+	
+	public int[][] getCoordinates();
+	public void setCoordinates(int[][] coordinates);
+		this.coordinates = coordinates;
+	}
+
+	/**
+	 * Methode setzt die Koordinaten eines Schiffs auf 0,0 wenn es getroffen wurde.
+	 * @param x
+	 * @param y
+	 */
+
+	public void setCoordinatesIfHitted(int x, int y) {
+		for(int i = 0; i < coordinates.length; i++){
+			if(coordinates[0][i] == x){
+				for(int j = 0; j < coordinates.length; j++){
+					if(coordinates[1][j] == y){
+						coordinates[0][i] = 0;
+						coordinates[1][j] = 0;
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * Methode überprüft, ob Schiff noch schwimmt oder untergegangen ist.
+	 * @return
+	 */
+
+	public boolean checkIfIsSwimming(){
+		int counter = 0;
+		for(int i = 0; i < this.coordinates.length; i++){
+			for(int j = 0; j < this.coordinates[i].length; j++){
+				if(coordinates[i][j] != 0){
+					counter++;
+				}
+			}
+		}
+		if(counter > 0){
+			return true;
+		}
+		return false;
+	}
+	
+	
+	
+}
