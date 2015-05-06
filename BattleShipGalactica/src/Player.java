@@ -14,37 +14,41 @@ public class Player implements IPlayer{
 	private int corvetteInt;
 	private int submarineInt;
 	private String playerName;
-	//TODO Objects from MatrixTools/BattleField
-	//private BattleField openField;
-	//private BattleField field;
-	
+	private BattleField privateField;
+	private BattleField publicField;
+
 	/**
 	 * Konstruktor der Klasse Player
 	 * setzt isAlive auf true wenn er erstellt wird.
 	 */
-	
-	public Player(){
+
+	public Player(BattleField field){
+		this.privateField = field;
+		this.publicField = new BattleField(field.getSize());
 		this.isAlive = true;
+		/*TODO Schiffsinitailisierung
+		 *  und Konstruktor erweitern
+		 */
 	}
-	
+
 	/**
 	 * Getter isActive
 	 * @return
 	 */
-	
+
 	public boolean getIsActive(){
 		return this.isActive;
 	}
-	
+
 	/**
 	 * Getter isAlive
 	 * @return
 	 */
-	
+
 	public boolean getIsAlive(){
 		return this.isAlive;
 	}
-	
+
 	/**
 	 * Getter TotalShips
 	 * @return
@@ -53,7 +57,7 @@ public class Player implements IPlayer{
 	public int getTotalShips() {
 		return totalShips;
 	}
-	
+
 	/**
 	 * Setter totalShips
 	 * @param totalShips
@@ -62,7 +66,7 @@ public class Player implements IPlayer{
 	public void setTotalShips(int totalShips) {
 		this.totalShips = totalShips;
 	}
-	
+
 	/**
 	 * Getter DestroyerAnzahl
 	 * @return
@@ -71,7 +75,7 @@ public class Player implements IPlayer{
 	public int getDestroyerInt() {
 		return destroyerInt;
 	}
-	
+
 	/**
 	 * Setter DestroyerArray
 	 * erzeugt mehrere Zerstörer
@@ -85,11 +89,11 @@ public class Player implements IPlayer{
 			destroyer[i] = new Destroyer();
 		}
 	}
-	
+
 	/**
 	 * setzt den Zerstörer auf isReady = false und setzt die NachladeZeit.
 	 */
-	
+
 	public void setDestroyerIsntReady(){
 		int counter = 0;
 		for(int i = 0; i < this.destroyerInt; i++){
@@ -100,14 +104,42 @@ public class Player implements IPlayer{
 					counter++;
 				}
 			}
-			
+
 		}
+	}
+	
+	/**
+	 * @return Gibt die Anzahl an Zerstörer an, die der Spieler besitzt
+	 */
+	public Destroyer[] getDestroyer() {
+		return destroyer;
+	}
+
+	/**
+	 * @return Gibt die Anzahl an Fregatten an, die der Spieler besitzt
+	 */
+	public Frigate[] getFrigate() {
+		return frigate;
+	}
+
+	/**
+	 * @return Gibt die Anzahl an Korvetten an, die der Spieler besitzt
+	 */
+	public Corvette[] getCorvette() {
+		return corvette;
+	}
+
+	/**
+	 * @return Gibt die Anzahl an UBooten an, die der Spieler besitzt
+	 */
+	public Submarine[] getSubmarine() {
+		return submarine;
 	}
 	
 	/**
 	 * Zählt die NachladeZeit herunter
 	 */
-	
+
 	public void reloadTimeCountdown(){
 		for(int i = 0; i < destroyerInt; i++){
 			if(destroyer[i].getReloadTimeLeft() > 0){
@@ -138,7 +170,7 @@ public class Player implements IPlayer{
 			}
 		}
 	}
-	
+
 	/**
 	 * Getter FrigatteInt
 	 * @return
@@ -147,7 +179,7 @@ public class Player implements IPlayer{
 	public int getFrigateInt() {
 		return frigateInt;
 	}
-	
+
 	/**
 	 * Setter FrigateInt
 	 * erzeugt mehrere Frigatten
@@ -161,11 +193,11 @@ public class Player implements IPlayer{
 			frigate[i] = new Frigate();
 		}
 	}
-	
+
 	/**
 	 * setzt die Frigatte auf isReady = false und setzt die NachladeZeit.
 	 */
-	
+
 	public void setFrigateIsntReady(){
 		int counter = 0;
 		for(int i = 0; i < this.frigateInt; i++){
@@ -178,7 +210,7 @@ public class Player implements IPlayer{
 			}
 		}
 	}
-	
+
 	/**
 	 * Getter für das FrigatteInt
 	 * @return
@@ -187,7 +219,7 @@ public class Player implements IPlayer{
 	public int getCorvetteInt() {
 		return corvetteInt;
 	}
-	
+
 	/**
 	 * Setter Corvette
 	 * erzeugt mehrer Corvetten
@@ -201,12 +233,12 @@ public class Player implements IPlayer{
 			corvette[i] = new Corvette();
 		}
 	}
-	
+
 	/**
 	 * Setzt die Corvette auf inn´t ready
 	 * und setzt die Nachladezeit
 	 */
-	
+
 	public void setCorvetteIsntReady(){
 		int counter = 0;
 		for(int i = 0; i < this.corvetteInt; i++){
@@ -217,7 +249,7 @@ public class Player implements IPlayer{
 					counter++;
 				}
 			}
-			
+
 		}
 	}
 
@@ -225,11 +257,11 @@ public class Player implements IPlayer{
 	 * Getter SubmarineInt
 	 * @return
 	 */
-	
+
 	public int getSubmarineInt() {
 		return submarineInt;
 	}
-	
+
 	/**
 	 * setzt Submarinen
 	 * erzeugt mehrer U-Boote
@@ -243,12 +275,12 @@ public class Player implements IPlayer{
 			submarine[i] = new Submarine();
 		}
 	}
-	
+
 	/**
 	 * setzt das U-Boot auf nicht ready
 	 * und setzt die Nachladezeit
 	 */
-	
+
 	public void setSubmarineIsntReady(){
 		int counter = 0;
 		for(int i = 0; i < this.submarineInt; i++){
@@ -259,19 +291,19 @@ public class Player implements IPlayer{
 					counter++;
 				}
 			}
-			
+
 		}
 	}
-	
+
 	/**
 	 * Getter für den Playernamen
 	 * @return
 	 */
-	
+
 	public String getPlayerName() {
 		return playerName;
 	}
-	
+
 	/**
 	 * Setter Playername
 	 * @param playerName
@@ -285,11 +317,11 @@ public class Player implements IPlayer{
 	 * setter isActive
 	 * @param isActive
 	 */
-	
+
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
 	}
-	
+
 	/**
 	 * Setter isAlive
 	 * @param isAlive
@@ -298,42 +330,46 @@ public class Player implements IPlayer{
 	public void setAlive(boolean isAlive) {
 		this.isAlive = isAlive;
 	}
-	
+
 	/**
 	 * getter für ein openField
 	 * @return
 	 */
-	
-	//TODO enable when BattleFied is implemented
-	/*
-	public field getOpenField(){
-		return openField;
-	}
-	
-	
 
-	public field getField() {
-		return field;
+	/**
+	 * @return Gibt das öffentliche Spielfeld des Spielers zurück
+	 */
+	public BattleField getPublicField() {
+		return this.publicField;
 	}
-	
-	
 
-	public void setField(field field) {
-		this.field = field;
+	/**
+	 * @return Gibt das private Spielfeld des Spielers zurück
+	 */
+	public BattleField getPrivateField() {
+		return this.privateField;
 	}
-	
-	
 
-	public void setOpenField(field openField) {
-		this.openField = openField;
+	/**
+	 * @param field setzt das private Spielfeld des Spielers
+	 */
+	public void setPrivateField(BattleField field) {
+		this.privateField = field;
 	}
-	*/
+
+	/**
+	 * @param field setzt das öffentliche Spielfeld des Spielers
+	 */
+	public void setPublicField(BattleField field) {
+		this.publicField = field;
+	}
+
 	/**
 	 * überprüft, ob ein Schiff verfügbar ist.
 	 * @param whichShip
 	 * @return true wenn whichShip isReady
 	 */
-	
+
 	public boolean isAvailable(int whichShip){
 		if(whichShip == 1){
 			for(int i = 0; i < destroyer.length; i++){
@@ -360,7 +396,7 @@ public class Player implements IPlayer{
 				}
 			}
 		}
-	
+
 		return false;
 	}
 
@@ -371,8 +407,8 @@ public class Player implements IPlayer{
 	 * @param length
 	 * @param shipNumber
 	 */
-	
-	
+
+
 	public void saveShipCoordinatesH(int x, int y, int length, int shipNumber){
 		int[][] coordinates = new int[2][length];
 		for(int i = 0; i < length; i++){
@@ -388,9 +424,9 @@ public class Player implements IPlayer{
 		}else if(length == 2){
 			submarine[shipNumber].setCoordinates(coordinates);
 		}
-		
+
 	}
-	
+
 	/**
 	 * Weist jedem Schiff seine Koordinaten zu (vertikal)
 	 * @param x
@@ -398,7 +434,7 @@ public class Player implements IPlayer{
 	 * @param length
 	 * @param shipNumber
 	 */
-	
+
 	public void saveShipCoordinatesV(int x, int y, int length, int shipNumber){
 		int[][] coordinates = new int[2][length];
 		for(int i = 0; i < length; i++){
@@ -423,7 +459,7 @@ public class Player implements IPlayer{
 	 * @param shipSymbol
 	 * @return true wenn das Schiff untergegangen ist.
 	 */
-	
+
 	public boolean checkIfSunk(int x, int y, String shipSymbol){
 		if(shipSymbol.equals("D")){
 			for(int i = 0; i < destroyer.length; i++){
@@ -456,12 +492,12 @@ public class Player implements IPlayer{
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Überprüft, ob ein Spieler überhaupt ein Schiff zur verfügung hat.
 	 * @return
 	 */
-	
+
 	public boolean checkIfAnyShipIsReady(){
 		for(int i = 0; i < destroyer.length; i++){
 			if(destroyer[i].isReady()){
@@ -485,4 +521,6 @@ public class Player implements IPlayer{
 		}
 		return false;
 	}
+
+
 }
