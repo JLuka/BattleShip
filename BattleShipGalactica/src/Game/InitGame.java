@@ -17,8 +17,7 @@ public class InitGame {
 	public InitGame(){
 		this.gameOptions = new Options();
 		this.configureGame();
-		Round rounds = new Round(player);
-
+		Round rounds = new Round(this.player, this.fieldSize);
 	}
 	
 	public Player[] getPlayer() {
@@ -256,22 +255,6 @@ public class InitGame {
 
 		}
 		return null;
-	}
-
-	private EShipType getShipTypeFromId(int shipId){
-		switch(shipId){
-		case 1: 
-			return EShipType.DESTROYER;
-		case 2: 
-			return EShipType.FRIGATE;
-		case 3: 
-			return EShipType.CORVETTE;
-		case 4: 
-			return EShipType.SUBMARINE;
-
-		default:
-			return null;
-		}
 	}
 
 }

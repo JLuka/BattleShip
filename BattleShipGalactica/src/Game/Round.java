@@ -1,13 +1,19 @@
 package Game;
 
+import Tools.ColoredPrint;
 import Tools.EShipType;
 import Tools.IO;
+import Tools.ColoredPrint.EPrintColor;
 
 public class Round {
 	private Player[] player;
+	private ColoredPrint colorPrint;
+private int fieldSize;
 
-	public Round(Player[] player){
+	public Round(Player[] player, int fieldSize){
 		this.player = player;
+		this.colorPrint = new ColoredPrint();
+		this.fieldSize = fieldSize;
 	}
 
 	public void play(){
@@ -26,7 +32,7 @@ public class Round {
 					if(player[i].checkIfAnyShipIsReady()){
 
 						//Bei allen Schiffen die laden, wird die reloadTime um einen verringert. Ist diese = 0 sind sie wieder verfügbar.
-
+						//TODO das passiert aber dann jede runde, ich dachte erst wenn alle spieler einmal dran waren :D, also vor der for Schleife
 						System.out.println(player[i].getPlayerName() + " ist an der Reihe.");
 						player[i].printPrivateField();
 
@@ -45,12 +51,14 @@ public class Round {
 							}
 						}
 						System.out.println("Geben sie nun die Zahl ihres Wunschgegners ein.");
+						//TODO was passiert bei einer Falschen eingabe des Gegners?
 						gegner = IO.readInt();
 						System.out.println("Sie spielen nun gegen "+ player[gegner-1].getPlayerName());
 
 						//Schiff zum angreifen wählen
 
 						System.out.println("Mit welchem Schiff möchten sie schießen?");
+						//TODO was ist wenn das Schiff laden muss?
 						if(player[i].getDestroyer().length > 0){
 							System.out.println("Zerstörer\t 1");
 						}
@@ -64,6 +72,11 @@ public class Round {
 							System.out.println("U-Boot\t\t 4");
 						}
 						schiff = IO.readInt();
+						/*TODO asooo wird erst hier geprüft... naja der anweder weiss ja vorher gar nich welche
+						 * auswahl er treffen darf und welche nich, lieber anzeigen welcher läd/nicht läd
+						 *und was ist wenn eine zu große zahl ausgewählt wird oder sie durch die Exception abgefangen wird :/
+						 *und eine unbrauchbare zahl enthalten ist
+						 */
 						while(player[i].isAvailable(schiff) == false){
 							System.out.println("Ihr/e Schiff lädt leider noch nach, bitte wählen sie ein anderes Schiff.");
 							schiff = IO.readInt();
@@ -73,8 +86,6 @@ public class Round {
 						//Koordinaten wählen und schießen
 
 						System.out.println("Geben sie nun die Koordinaten ein, auf die sie schießen möchten.");
-
-						//TODO auf checkPos zugreifen. Wusste nicht, ob ich die Methode hier nochmal einfügen sollte oder iwie auf die Methode zugreifen sollte...
 
 						String pos = IO.readString();
 						int[] koordinaten = checkPos(pos);
@@ -102,7 +113,9 @@ public class Round {
 
 						//Überprüft, ob der Gegner noch am Leben ist, wenn nicht wird isAlive auf false gesetzt.
 						
-						//TODO Die Methode isDead hatte ich in meiner Klasse field, hat überprüft, ob Player überhaupt noch ein Schiff besitzt. Und nun? :D
+						/*TODO Die Methode isDead hatte ich in meiner Klasse field, hat überprüft, ob Player überhaupt noch ein Schiff besitzt. Und nun? :D
+						 * kannste gerne einfach bei dem player einbauen =) oder ich bastel sie rein, wie es dir lieber ist
+						 */
 						
 						if(player[gegner-1].getPrivateField().isDead() == true){
 							player[gegner-1].setAlive(false);
@@ -150,7 +163,39 @@ public class Round {
 		}
 	}
 
+	/**
+	 * @param pos - die zu überprüfenden Koordinaten 
+	 * @return Gibt zurück, ob die eingegebenen Koordinaten korrekt sind
+	 */
+	private int[] checkPos(String pos){
+		try{
+			pos = pos.replaceAll("\\s+", "");
 
+			String[] sKoordinaten = pos.split(",");
+			int[] iKoordinaten = new int[2];
+
+			if(sKoordinaten.length != 2){
+				return null;
+			}
+			for(int i = 0; i < 2; i++){
+				int toInt = Integer.parseInt(sKoordinaten[i]);
+
+				if(toInt < 0 || toInt > fieldSize){
+					return null;
+				}
+				else{
+					iKoordinaten[i] = toInt;
+				}
+			}
+
+			return iKoordinaten;
+		}
+		catch(Exception e){
+			this.colorPrint.println(EPrintColor.RED, "Ungültige Eingabe");
+
+		}
+		return null;
+	}
 
 
 	public int ende(){
