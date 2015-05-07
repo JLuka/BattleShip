@@ -384,32 +384,32 @@ public class Player{
 	 * @return true wenn das Schiff untergegangen ist.
 	 */
 
-	public boolean checkIfSunk(int x, int y, String shipSymbol){
+	public boolean checkIfSunk(String shipSymbol){
 		if(shipSymbol.equals("D")){
 			for(int i = 0; i < destroyer.length; i++){
-				destroyer[i].setCoordinatesIfHitted(x, y);
 				if(destroyer[i].checkIfIsSwimming() == false){
+					System.out.println("Herzlichen Glückwunsch, du hast den Zerstörer von " + this.playerName + " versenkt.");
 					return true;
 				}
 			}
 		}else if(shipSymbol.equals("F")){
 			for(int i = 0; i < frigate.length; i++){
-				frigate[i].setCoordinatesIfHitted(x, y);
 				if(frigate[i].checkIfIsSwimming() == false){
+					System.out.println("Herzlichen Glückwunsch, du hast die Frigatte von " + this.playerName + " versenkt.");
 					return true;
 				}
 			}
 		}else if(shipSymbol.equals("C")){
 			for(int i = 0; i < corvette.length; i++){
-				corvette[i].setCoordinatesIfHitted(x, y);
 				if(corvette[i].checkIfIsSwimming() == false){
+					System.out.println("Herzlichen Glückwunsch, du hast die Corvette von " + this.playerName + " versenkt.");
 					return true;
 				}
 			}
 		}else if(shipSymbol.equals("S")){
 			for(int i = 0; i < submarine.length; i++){
-				submarine[i].setCoordinatesIfHitted(x, y);
 				if(submarine[i].checkIfIsSwimming() == false){
+					System.out.println("Herzlichen Glückwunsch, du hast das U-Boot von " + this.playerName + " versenkt.");
 					return true;
 				}
 			}
@@ -454,8 +454,28 @@ public class Player{
 		publicField.printPrivateField(playerName);
 	}
 	
-	public void checkPos(){
-		
+	public boolean checkIfShipIsReady(String shipSymbol){
+		for(int i = 0; i < destroyer.length; i++){
+			if(destroyer[i].isReady()){
+				return true;
+			}
+		}
+		for(int i = 0; i < frigate.length; i++){
+			if(frigate[i].isReady()){
+				return true;
+			}
+		}
+		for(int i = 0; i < corvette.length; i++){
+			if(corvette[i].isReady()){
+				return true;
+			}
+		}
+		for(int i = 0; i < destroyer.length; i++){
+			if(corvette[i].isReady()){
+				return true;
+			}
+		}
+		return false;
 	}
 
 

@@ -25,14 +25,17 @@ private int fieldSize;
 		int schiff;
 		int counter = 1;
 		while(ende() > 1){
+			for(int i = 0; i<player.length;i++){
+				player[i].reloadTimeCountdown();
+			}
+			
 			for(int i = 0; i < player.length; i++){
 
 				if(player[i].getIsAlive()){
-					player[i].reloadTimeCountdown();
+					
 					if(player[i].checkIfAnyShipIsReady()){
 
 						//Bei allen Schiffen die laden, wird die reloadTime um einen verringert. Ist diese = 0 sind sie wieder verfügbar.
-						//TODO das passiert aber dann jede runde, ich dachte erst wenn alle spieler einmal dran waren :D, also vor der for Schleife
 						System.out.println(player[i].getPlayerName() + " ist an der Reihe.");
 						player[i].printPrivateField();
 
@@ -58,29 +61,29 @@ private int fieldSize;
 						//Schiff zum angreifen wählen
 
 						System.out.println("Mit welchem Schiff möchten sie schießen?");
-						//TODO was ist wenn das Schiff laden muss?
+						
 						if(player[i].getDestroyer().length > 0){
-							System.out.println("Zerstörer\t 1");
+							if(player[i].checkIfShipIsReady("D")){
+								System.out.println("Zerstörer\t 1");
+							}
 						}
 						if(player[i].getFrigate().length > 0){
-							System.out.println("Frigatte\t 2");
+							if(player[i].checkIfShipIsReady("F")){
+								System.out.println("Frigatte\t 2");
+							}
 						}
 						if(player[i].getCorvette().length > 0){
-							System.out.println("Korvette\t 3");
+							if(player[i].checkIfShipIsReady("C")){
+								System.out.println("Korvette\t 3");
+							}
 						}
 						if(player[i].getSubmarine().length > 0){
-							System.out.println("U-Boot\t\t 4");
+							if(player[i].checkIfShipIsReady("S")){
+								System.out.println("U-Boot\t\t 4");	
+							}
 						}
 						schiff = IO.readInt();
-						/*TODO asooo wird erst hier geprüft... naja der anweder weiss ja vorher gar nich welche
-						 * auswahl er treffen darf und welche nich, lieber anzeigen welcher läd/nicht läd
-						 *und was ist wenn eine zu große zahl ausgewählt wird oder sie durch die Exception abgefangen wird :/
-						 *und eine unbrauchbare zahl enthalten ist
-						 */
-						while(player[i].isAvailable(schiff) == false){
-							System.out.println("Ihr/e Schiff lädt leider noch nach, bitte wählen sie ein anderes Schiff.");
-							schiff = IO.readInt();
-						}
+						
 						player[gegner-1].printPublicField();
 
 						//Koordinaten wählen und schießen
@@ -96,18 +99,22 @@ private int fieldSize;
 							orientation = IO.readChar();
 							player[gegner-1].getPrivateField().setAttack(EShipType.DESTROYER, koordinaten,orientation, player[gegner-1]);
 							player[i].setDestroyerIsntReady();
+							player[gegner-1].checkIfSunk("D");
 						} else if(schiff == 2){
 							System.out.println("Horizontal (h) oder Vertikal(v)?");
 							orientation = IO.readChar();
 							player[gegner-1].getPrivateField().setAttack(EShipType.FRIGATE,koordinaten,orientation,player[gegner-1]);
+							player[gegner-1].checkIfSunk("F");
 							player[i].setFrigateIsntReady();
 						} else if(schiff == 3){
 							orientation = 'h';
 							player[gegner-1].getPrivateField().setAttack(EShipType.CORVETTE,koordinaten,orientation,player[gegner-1]);
+							player[gegner-1].checkIfSunk("C");
 							player[i].setCorvetteIsntReady();
 						} else if(schiff == 4){
 							orientation = 'h';
 							player[gegner-1].getPrivateField().setAttack(EShipType.SUBMARINE,koordinaten,orientation,player[gegner-1]);
+							player[gegner-1].checkIfSunk("S");
 							player[i].setSubmarineIsntReady();
 						}
 

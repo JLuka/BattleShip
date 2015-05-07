@@ -15,6 +15,7 @@ public class Ship{
 	private int shootArea;
 	private int reloadTimeLeft;
 	private int[][] coordinates;
+	private int isHit = 0;
 
 
 	/**
@@ -162,10 +163,12 @@ public class Ship{
 					if(coordinates[1][j] == y){
 						coordinates[0][i] = 0;
 						coordinates[1][j] = 0;
+						isHit++;
 					}
 				}
 			}
 		}
+		checkIfIsSwimming();
 	}
 
 	/**
@@ -174,18 +177,10 @@ public class Ship{
 	 */
 
 	public boolean checkIfIsSwimming(){
-		int counter = 0;
-		for(int i = 0; i < this.coordinates.length; i++){
-			for(int j = 0; j < this.coordinates[i].length; j++){
-				if(coordinates[i][j] != 0){
-					counter++;
-				}
-			}
+		if(isHit == shipSize){
+			return false;
 		}
-		if(counter > 0){
-			return true;
-		}
-		return false;
+		return true;
 	}
 
 }
