@@ -1,5 +1,11 @@
 package Ships;
 
+/**
+ * Write a description of class MatrixTools here.
+ * 
+ * @author JL
+ * @version 07.05.14
+ */
 
 public class Ship{
 

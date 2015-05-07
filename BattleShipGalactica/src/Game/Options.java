@@ -99,7 +99,7 @@ public class Options {
 				}
 
 			}while(nameUnique == false);
-			this.playerNames[i] = tempName;	
+			this.playerNames[i] = tempName;
 		}
 	}
 

@@ -17,7 +17,12 @@ public class InitGame {
 	public InitGame(){
 		this.gameOptions = new Options();
 		this.configureGame();
+		Round rounds = new Round(player);
 
+	}
+	
+	public Player[] getPlayer() {
+		return player;
 	}
 
 	private void configureGame(){
@@ -41,11 +46,13 @@ public class InitGame {
 
 	}
 
+	
+
 	/**
 	 *  Positionierung der Schiffe von jedem Spieler (nacheinander)
 	 */
 	private void setShipsToField(){
-		IO.println("Der Reihe nach platziert jeder sein Schiffe!\n");
+		IO.println("Der Reihe nach platziert jeder sein/e Schiff/e!\n");
 
 		for(int i = 0; i < player.length; i++){
 

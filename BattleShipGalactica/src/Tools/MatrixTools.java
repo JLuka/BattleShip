@@ -6,7 +6,7 @@ import Game.Player;
 /**
  * Write a description of class MatrixTools here.
  * 
- * @author ML 
+ * @author ML
  * @version 09.12.14
  */
 public class MatrixTools

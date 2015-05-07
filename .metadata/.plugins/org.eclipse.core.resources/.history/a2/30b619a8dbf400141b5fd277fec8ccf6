@@ -1,0 +1,12 @@
+package Game;
+
+public class Round {
+	private Player[] player;
+	private InitGame init;
+	
+	
+	public Round(){
+		this.init = new InitGame();
+		this.player = init.getPlayer();
+	}
+}

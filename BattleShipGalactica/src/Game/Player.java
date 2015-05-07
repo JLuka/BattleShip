@@ -5,6 +5,12 @@ import Ships.Frigate;
 import Ships.Submarine;
 import Ships.Ship;
 
+/**
+ * Write a description of class MatrixTools here.
+ * 
+ * @author JL
+ * @version 07.05.14
+ */
 
 public class Player{
 
@@ -438,6 +444,18 @@ public class Player{
 			}
 		}
 		return false;
+	}
+	
+	public void printPrivateField(){
+		privateField.printPrivateField(playerName);
+	}
+	
+	public void printPublicField(){
+		publicField.printPrivateField(playerName);
+	}
+	
+	public void checkPos(){
+		
 	}
 
 

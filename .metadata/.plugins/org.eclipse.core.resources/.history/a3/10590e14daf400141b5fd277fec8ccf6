@@ -1,0 +1,7 @@
+package Game;
+
+public class Round {
+
+	private Player[] player;
+	player = initGame.getPlayer();
+}
