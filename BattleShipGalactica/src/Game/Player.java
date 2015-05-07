@@ -16,10 +16,6 @@ public class Player{
 	private boolean isActive;
 	private boolean isAlive;
 	private int totalShips;
-	private int destroyerInt;
-	private int frigateInt;
-	private int corvetteInt;
-	private int submarineInt;
 	private String playerName;
 	private BattleField privateField;
 	private BattleField publicField;
@@ -27,8 +23,9 @@ public class Player{
 	/**
 	 * Konstruktor der Klasse Player
 	 * setzt isAlive auf true wenn er erstellt wird.
+	 * erstellt alle Schiffe eines Spielers
+	 * 
 	 */
-
 
 	public Player(boolean isActive, int totalShips, int destroyer, int frigate,
 			int corvette, int submarine, String playerName, BattleField field) {
@@ -37,279 +34,26 @@ public class Player{
 		this.totalShips = totalShips;
 
 		this.destroyer = new Destroyer[destroyer];
+		for(int i = 0; i < destroyer; i++){
+			this.destroyer[i] = new Destroyer();
+		}
 		this.frigate = new Frigate[frigate];
+		for(int i = 0; i < frigate; i++){
+			this.frigate[i] = new Frigate();
+		}
 		this.corvette = new Corvette[corvette];
+		for(int i = 0; i < corvette; i++){
+			this.corvette[i] = new Corvette();
+		}
 		this.submarine = new Submarine[submarine];
-		
+		for(int i = 0; i < submarine; i++){
+			this.submarine[i] = new Submarine();
+		}
 		this.privateField = field;
 		this.publicField = new BattleField(field.getSize());
 
 	}
-
-	/**
-	 * Getter isActive
-	 * @return
-	 */
-
-	public boolean getIsActive(){
-		return this.isActive;
-	}
-
-	/**
-	 * Getter isAlive
-	 * @return
-	 */
-
-	public boolean getIsAlive(){
-		return this.isAlive;
-	}
-
-	/**
-	 * Getter TotalShips
-	 * @return
-	 */
-
-	public int getTotalShips() {
-		return totalShips;
-	}
-
-	/**
-	 * Setter totalShips
-	 * @param totalShips
-	 */
-
-	public void setTotalShips(int totalShips) {
-		this.totalShips = totalShips;
-	}
-
-	/**
-	 * Getter DestroyerAnzahl
-	 * @return
-	 */
-
-	public int getDestroyerInt() {
-		return destroyerInt;
-	}
-
-	/**
-	 * Setter DestroyerArray
-	 * erzeugt mehrere Zerstörer
-	 * @param destroyerInt
-	 */
-
-	public void setDestroyer(int destroyerInt) {
-		this.destroyerInt = destroyerInt;
-		destroyer = new Destroyer[destroyerInt];
-		for(int i = 0; i < destroyerInt; i++){
-			destroyer[i] = new Destroyer();
-		}
-	}
-
-	/**
-	 * setzt den Zerstörer auf isReady = false und setzt die NachladeZeit.
-	 */
-
-	public void setDestroyerIsntReady(){
-		int counter = 0;
-		for(int i = 0; i < this.destroyerInt; i++){
-			if(counter == 0){
-				if(destroyer[i].isReady() == true){
-					destroyer[i].setReady(false);
-					destroyer[i].setReloadTimeLeft(destroyer[i].getReloadTime());
-					counter++;
-				}
-			}
-
-		}
-	}
 	
-	/**
-	 * @return Gibt die Anzahl an Zerstörer an, die der Spieler besitzt
-	 */
-	public Destroyer[] getDestroyer() {
-		return destroyer;
-	}
-
-	/**
-	 * @return Gibt die Anzahl an Fregatten an, die der Spieler besitzt
-	 */
-	public Frigate[] getFrigate() {
-		return frigate;
-	}
-
-	/**
-	 * @return Gibt die Anzahl an Korvetten an, die der Spieler besitzt
-	 */
-	public Corvette[] getCorvette() {
-		return corvette;
-	}
-
-	/**
-	 * @return Gibt die Anzahl an UBooten an, die der Spieler besitzt
-	 */
-	public Submarine[] getSubmarine() {
-		return submarine;
-	}
-	
-	/**
-	 * Zählt die NachladeZeit herunter
-	 */
-
-	public void reloadTimeCountdown(){
-		for(int i = 0; i < destroyerInt; i++){
-			if(destroyer[i].getReloadTimeLeft() > 0){
-				destroyer[i].setReloadTimeLeft(destroyer[i].getReloadTimeLeft()-1);
-			}else{
-				destroyer[i].setReady(true);
-			}
-		}
-		for(int i = 0; i < frigateInt; i++){
-			if(frigate[i].getReloadTimeLeft() > 0){
-				frigate[i].setReloadTimeLeft(frigate[i].getReloadTimeLeft()-1);
-			}else{
-				frigate[i].setReady(true);
-			}
-		}
-		for(int i = 0; i < corvetteInt; i++){
-			if(corvette[i].getReloadTimeLeft() > 0){
-				corvette[i].setReloadTimeLeft(corvette[i].getReloadTimeLeft()-1);
-			}else{
-				corvette[i].setReady(true);
-			}
-		}
-		for(int i = 0; i < submarineInt; i++){
-			if(submarine[i].getReloadTimeLeft() > 0){
-				submarine[i].setReloadTimeLeft(submarine[i].getReloadTimeLeft()-1);
-			}else{
-				submarine[i].setReady(true);
-			}
-		}
-	}
-
-	/**
-	 * Getter FrigatteInt
-	 * @return
-	 */
-
-	public int getFrigateInt() {
-		return frigateInt;
-	}
-
-	/**
-	 * Setter FrigateInt
-	 * erzeugt mehrere Frigatten
-	 * @param frigateInt
-	 */
-
-	public void setFrigate(int frigateInt) {
-		this.frigateInt = frigateInt;
-		frigate = new Frigate[frigateInt];
-		for(int i = 0; i < frigateInt; i++){
-			frigate[i] = new Frigate();
-		}
-	}
-
-	/**
-	 * setzt die Frigatte auf isReady = false und setzt die NachladeZeit.
-	 */
-
-	public void setFrigateIsntReady(){
-		int counter = 0;
-		for(int i = 0; i < this.frigateInt; i++){
-			if(counter == 0){
-				if(frigate[i].isReady() == true){
-					frigate[i].setReady(false);
-					frigate[i].setReloadTimeLeft(frigate[i].getReloadTime());
-					counter++;
-				}
-			}
-		}
-	}
-
-	/**
-	 * Getter für das FrigatteInt
-	 * @return
-	 */
-
-	public int getCorvetteInt() {
-		return corvetteInt;
-	}
-
-	/**
-	 * Setter Corvette
-	 * erzeugt mehrer Corvetten
-	 * @param corvetteInt
-	 */
-
-	public void setCorvette(int corvetteInt) {
-		this.corvetteInt = corvetteInt;
-		corvette = new Corvette[corvetteInt];
-		for(int i = 0; i < corvetteInt; i++){
-			corvette[i] = new Corvette();
-		}
-	}
-
-	/**
-	 * Setzt die Corvette auf inn´t ready
-	 * und setzt die Nachladezeit
-	 */
-
-	public void setCorvetteIsntReady(){
-		int counter = 0;
-		for(int i = 0; i < this.corvetteInt; i++){
-			if(counter == 0){
-				if(corvette[i].isReady() == true){
-					corvette[i].setReady(false);
-					corvette[i].setReloadTimeLeft(corvette[i].getReloadTime());
-					counter++;
-				}
-			}
-
-		}
-	}
-
-	/**
-	 * Getter SubmarineInt
-	 * @return
-	 */
-
-	public int getSubmarineInt() {
-		return submarineInt;
-	}
-
-	/**
-	 * setzt Submarinen
-	 * erzeugt mehrer U-Boote
-	 * @param submarineInt
-	 */
-
-	public void setSubmarine(int submarineInt) {
-		this.submarineInt = submarineInt;
-		submarine = new Submarine[submarineInt];
-		for(int i = 0; i < submarineInt; i++){
-			submarine[i] = new Submarine();
-		}
-	}
-
-	/**
-	 * setzt das U-Boot auf nicht ready
-	 * und setzt die Nachladezeit
-	 */
-
-	public void setSubmarineIsntReady(){
-		int counter = 0;
-		for(int i = 0; i < this.submarineInt; i++){
-			if(counter == 0){
-				if(submarine[i].isReady() == true){
-					submarine[i].setReady(false);
-					submarine[i].setReloadTimeLeft(submarine[i].getReloadTime());
-					counter++;
-				}
-			}
-
-		}
-	}
-
 	/**
 	 * Getter für den Playernamen
 	 * @return
@@ -378,6 +122,164 @@ public class Player{
 	public void setPublicField(BattleField field) {
 		this.publicField = field;
 	}
+
+	/**
+	 * Getter isActive
+	 * @return
+	 */
+
+	public boolean getIsActive(){
+		return this.isActive;
+	}
+
+	/**
+	 * Getter isAlive
+	 * @return
+	 */
+
+	public boolean getIsAlive(){
+		return this.isAlive;
+	}
+	
+	/**
+	 * @return Gibt die Anzahl an Zerstörer an, die der Spieler besitzt
+	 */
+	public Destroyer[] getDestroyer() {
+		return destroyer;
+	}
+
+	/**
+	 * @return Gibt die Anzahl an Fregatten an, die der Spieler besitzt
+	 */
+	public Frigate[] getFrigate() {
+		return frigate;
+	}
+
+	/**
+	 * @return Gibt die Anzahl an Korvetten an, die der Spieler besitzt
+	 */
+	public Corvette[] getCorvette() {
+		return corvette;
+	}
+
+	/**
+	 * @return Gibt die Anzahl an UBooten an, die der Spieler besitzt
+	 */
+	public Submarine[] getSubmarine() {
+		return submarine;
+	}
+
+	/**
+	 * setzt den Zerstörer auf isReady = false und setzt die NachladeZeit.
+	 */
+
+	public void setDestroyerIsntReady(){
+		int counter = 0;
+		for(int i = 0; i < this.destroyer.length; i++){
+			if(counter == 0){
+				if(destroyer[i].isReady() == true){
+					destroyer[i].setReady(false);
+					destroyer[i].setReloadTimeLeft(destroyer[i].getReloadTime());
+					counter++;
+				}
+			}
+
+		}
+	}
+	
+	
+	/**
+	 * Zählt die NachladeZeit herunter
+	 */
+
+	public void reloadTimeCountdown(){
+		for(int i = 0; i < destroyer.length; i++){
+			if(destroyer[i].getReloadTimeLeft() > 0){
+				destroyer[i].setReloadTimeLeft(destroyer[i].getReloadTimeLeft()-1);
+			}else{
+				destroyer[i].setReady(true);
+			}
+		}
+		for(int i = 0; i < frigate.length; i++){
+			if(frigate[i].getReloadTimeLeft() > 0){
+				frigate[i].setReloadTimeLeft(frigate[i].getReloadTimeLeft()-1);
+			}else{
+				frigate[i].setReady(true);
+			}
+		}
+		for(int i = 0; i < corvette.length; i++){
+			if(corvette[i].getReloadTimeLeft() > 0){
+				corvette[i].setReloadTimeLeft(corvette[i].getReloadTimeLeft()-1);
+			}else{
+				corvette[i].setReady(true);
+			}
+		}
+		for(int i = 0; i < submarine.length; i++){
+			if(submarine[i].getReloadTimeLeft() > 0){
+				submarine[i].setReloadTimeLeft(submarine[i].getReloadTimeLeft()-1);
+			}else{
+				submarine[i].setReady(true);
+			}
+		}
+	}
+
+
+	/**
+	 * setzt die Frigatte auf isReady = false und setzt die NachladeZeit.
+	 */
+
+	public void setFrigateIsntReady(){
+		int counter = 0;
+		for(int i = 0; i < this.frigate.length; i++){
+			if(counter == 0){
+				if(frigate[i].isReady() == true){
+					frigate[i].setReady(false);
+					frigate[i].setReloadTimeLeft(frigate[i].getReloadTime());
+					counter++;
+				}
+			}
+		}
+	}
+
+	/**
+	 * Setzt die Corvette auf inn´t ready
+	 * und setzt die Nachladezeit
+	 */
+
+	public void setCorvetteIsntReady(){
+		int counter = 0;
+		for(int i = 0; i < this.corvette.length; i++){
+			if(counter == 0){
+				if(corvette[i].isReady() == true){
+					corvette[i].setReady(false);
+					corvette[i].setReloadTimeLeft(corvette[i].getReloadTime());
+					counter++;
+				}
+			}
+
+		}
+	}
+
+	/**
+	 * setzt das U-Boot auf nicht ready
+	 * und setzt die Nachladezeit
+	 */
+
+	public void setSubmarineIsntReady(){
+		int counter = 0;
+		for(int i = 0; i < this.submarine.length; i++){
+			if(counter == 0){
+				if(submarine[i].isReady() == true){
+					submarine[i].setReady(false);
+					submarine[i].setReloadTimeLeft(submarine[i].getReloadTime());
+					counter++;
+				}
+			}
+
+		}
+	}
+
+	
 
 	/**
 	 * überprüft, ob ein Schiff verfügbar ist.

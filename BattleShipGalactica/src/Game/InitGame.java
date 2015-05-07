@@ -8,23 +8,36 @@ import Tools.IO;
 public class InitGame {
 
 	private Options gameOptions;
+
 	private Player[] player;
 	private ColoredPrint colorPrint = new ColoredPrint();
 	private int fieldSize;
 	
+	
 	public InitGame(){
 		this.gameOptions = new Options();
 		this.configureGame();
+ 
 	}
 
 	private void configureGame(){
-		/*TODO initplayer from Options
-		 * and BattleField
-		 */
 		this.player = new Player[this.gameOptions.getPlayer()];
 		this.fieldSize = this.gameOptions.getBattlefieldSize();
 		
-		this.setShipsToField();	
+		
+		for(int i = 0; i < player.length; i++){
+			BattleField battlefield = new BattleField(fieldSize);
+			if(i == 0){
+				player[i] = new Player(true, this.gameOptions.getTotalShips(), this.gameOptions.getDestroyer(), 
+				this.gameOptions.getFrigate(), this.gameOptions.getCorvette(),this.gameOptions.getSubmarine(),this.gameOptions.getPlayerNames()[i], battlefield);
+			}else{
+				player[i] = new Player(false, this.gameOptions.getTotalShips(), this.gameOptions.getDestroyer(), 
+						this.gameOptions.getFrigate(), this.gameOptions.getCorvette(),this.gameOptions.getSubmarine(),this.gameOptions.getPlayerNames()[i], battlefield);
+			}
+			
+		}
+		
+		this.setShipsToField();
 
 	}
 

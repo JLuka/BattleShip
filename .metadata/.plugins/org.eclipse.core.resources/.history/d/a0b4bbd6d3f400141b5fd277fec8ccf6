@@ -1,0 +1,10 @@
+package Main;
+
+import Game.InitGame;
+
+public class Main {
+	public static void main(String[] args){
+		Options start = new Options();
+		start.initGame();
+	}
+}
