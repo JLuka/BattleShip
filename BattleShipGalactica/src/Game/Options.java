@@ -13,7 +13,8 @@ public class Options {
 	private int battlefieldSize;
 
 	public Options(){
-		totalShips = 0;
+		this.totalShips = 0;
+		this.initGame();
 	}
 
 	public int getPlayer() {
