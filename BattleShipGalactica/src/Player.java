@@ -22,7 +22,17 @@ public class Player implements IPlayer{
 	 * setzt isAlive auf true wenn er erstellt wird.
 	 */
 
-	public Player(BattleField field){
+	public Player(boolean isActive, int totalShips, int destroyer, int frigate,
+			int corvette, int submarine, String playerName, BattleField field) {
+		this.isAlive = true;
+		this.isActive = isActive;
+		this.totalShips = totalShips;
+
+		this.destroyer = new Destroyer[destroyer];
+		this.frigate = new Frigate[frigate];
+		this.corvette = new Corvette[corvette];
+		this.submarine = new Submarine[submarine];
+		
 		this.privateField = field;
 		this.publicField = new BattleField(field.getSize());
 		this.isAlive = true;
