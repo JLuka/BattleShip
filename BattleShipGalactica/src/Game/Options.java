@@ -16,6 +16,38 @@ public class Options {
 		totalShips = 0;
 	}
 
+	public int getPlayer() {
+		return player;
+	}
+
+	public String[] getPlayerNames() {
+		return playerNames;
+	}
+
+	public int getDestroyer() {
+		return destroyer;
+	}
+
+	public int getFrigate() {
+		return frigate;
+	}
+
+	public int getCorvette() {
+		return corvette;
+	}
+
+	public int getSubmarine() {
+		return submarine;
+	}
+
+	public int getTotalShips() {
+		return totalShips;
+	}
+
+	public int getBattlefieldSize() {
+		return battlefieldSize;
+	}
+
 	/**
 	 * Spielstart ruft die Optionen für Spieler, Spielfeld und Schiffe auf
 	 */
