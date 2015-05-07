@@ -24,7 +24,7 @@ public class MatrixTools
 	 */
 	public void printPrivateField(int[][] matrix, String name){
 
-		int[][] printMatrix = new int[matrix.length+1][matrix.length+1];
+		int[][] printMatrix = new int[matrix.length][matrix.length];
 
 		IO.println("Spielfeld von \"" + name + "\"");
 

@@ -19,7 +19,7 @@ import Tools.MatrixTools;
 		 */
 		public BattleField(int size) {
 			this.size = size;
-			this.field = new int[this.size][this.size];
+			this.field = new int[this.size+1][this.size+1];
 			initField();
 		}
 

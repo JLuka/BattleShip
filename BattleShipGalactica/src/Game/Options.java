@@ -77,6 +77,7 @@ public class Options {
 
 		this.player = count;
 		this.playerNames = new String[count];
+		
 		for(int i = 0; i < count; i++){
 			int c = i+1;
 			boolean nameUnique = true;

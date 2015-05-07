@@ -32,7 +32,8 @@ public class Player{
 		this.isAlive = true;
 		this.isActive = isActive;
 		this.totalShips = totalShips;
-
+		this.playerName = playerName;
+		
 		this.destroyer = new Destroyer[destroyer];
 		for(int i = 0; i < destroyer; i++){
 			this.destroyer[i] = new Destroyer();
@@ -53,7 +54,7 @@ public class Player{
 		this.publicField = new BattleField(field.getSize());
 
 	}
-	
+
 	/**
 	 * Getter für den Playernamen
 	 * @return
@@ -140,7 +141,7 @@ public class Player{
 	public boolean getIsAlive(){
 		return this.isAlive;
 	}
-	
+
 	/**
 	 * @return Gibt die Anzahl an Zerstörer an, die der Spieler besitzt
 	 */
@@ -186,8 +187,8 @@ public class Player{
 
 		}
 	}
-	
-	
+
+
 	/**
 	 * Zählt die NachladeZeit herunter
 	 */
@@ -279,7 +280,7 @@ public class Player{
 		}
 	}
 
-	
+
 
 	/**
 	 * überprüft, ob ein Schiff verfügbar ist.
