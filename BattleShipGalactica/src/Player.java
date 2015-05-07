@@ -35,7 +35,6 @@ public class Player implements IPlayer{
 		
 		this.privateField = field;
 		this.publicField = new BattleField(field.getSize());
-		this.isAlive = true;
 		/*TODO Schiffsinitailisierung
 		 *  und Konstruktor erweitern
 		 */
