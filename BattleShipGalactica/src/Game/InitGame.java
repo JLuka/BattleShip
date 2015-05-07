@@ -12,31 +12,31 @@ public class InitGame {
 	private Player[] player;
 	private ColoredPrint colorPrint = new ColoredPrint();
 	private int fieldSize;
-	
-	
+
+
 	public InitGame(){
 		this.gameOptions = new Options();
 		this.configureGame();
- 
+
 	}
 
 	private void configureGame(){
 		this.player = new Player[this.gameOptions.getPlayer()];
 		this.fieldSize = this.gameOptions.getBattlefieldSize();
-		
-		
+
+
 		for(int i = 0; i < player.length; i++){
 			BattleField battlefield = new BattleField(fieldSize);
 			if(i == 0){
 				player[i] = new Player(true, this.gameOptions.getTotalShips(), this.gameOptions.getDestroyer(), 
-				this.gameOptions.getFrigate(), this.gameOptions.getCorvette(),this.gameOptions.getSubmarine(),this.gameOptions.getPlayerNames()[i], battlefield);
+						this.gameOptions.getFrigate(), this.gameOptions.getCorvette(),this.gameOptions.getSubmarine(),this.gameOptions.getPlayerNames()[i], battlefield);
 			}else{
 				player[i] = new Player(false, this.gameOptions.getTotalShips(), this.gameOptions.getDestroyer(), 
 						this.gameOptions.getFrigate(), this.gameOptions.getCorvette(),this.gameOptions.getSubmarine(),this.gameOptions.getPlayerNames()[i], battlefield);
 			}
-			
+
 		}
-		
+
 		this.setShipsToField();
 
 	}
@@ -67,7 +67,6 @@ public class InitGame {
 			 * Solange wie die eingegebenen Koordinaten ungültig sind,
 			 * wird erneut aufgefordert das Schiff zu positionieren
 			 */
-
 
 			//ZERSTÖRER
 			for(int d = 0; d < destroyer; d++){
@@ -138,6 +137,7 @@ public class InitGame {
 						}
 					}
 				}
+
 			}
 
 			//KORVETTE
@@ -173,12 +173,13 @@ public class InitGame {
 						}
 					}
 				}
+
 			}
 
 			//UBOOT
 			for(int s = 0; s < submarine; s++){
 				int id = s+1;
-				IO.println("UBoot (" + s + ")");
+				IO.println("UBoot (" + id + ")");
 				boolean checked = false;
 
 				while(checked == false){
@@ -208,6 +209,10 @@ public class InitGame {
 						}
 					}
 				}
+
+			}
+			for(int q = 0; q < 150; q++){
+				IO.println("");
 			}
 		}
 	}
@@ -228,7 +233,7 @@ public class InitGame {
 			}
 			for(int i = 0; i < 2; i++){
 				int toInt = Integer.parseInt(sKoordinaten[i]);
-				
+
 				if(toInt < 0 || toInt > fieldSize){
 					return null;
 				}
