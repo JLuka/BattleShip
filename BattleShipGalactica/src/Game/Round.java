@@ -8,12 +8,13 @@ import Tools.ColoredPrint.EPrintColor;
 public class Round {
 	private Player[] player;
 	private ColoredPrint colorPrint;
-private int fieldSize;
+	private int fieldSize;
 
 	public Round(Player[] player, int fieldSize){
 		this.player = player;
 		this.colorPrint = new ColoredPrint();
 		this.fieldSize = fieldSize;
+		this.play();
 	}
 
 	public void play(){
@@ -21,47 +22,76 @@ private int fieldSize;
 		int y;
 		char orientation;
 		String eingabe;
-		int gegner;
+		int gegner = 0;
 		int schiff;
 		int counter = 1;
 		while(ende() > 1){
-			for(int i = 0; i<player.length;i++){
+			//Bei allen Schiffen die laden, wird die reloadTime um einen verringert. Ist diese = 0 sind sie wieder verfügbar.
+			for(int i = 0; i < player.length;i++){
 				player[i].reloadTimeCountdown();
 			}
-			
+
 			for(int i = 0; i < player.length; i++){
 
 				if(player[i].getIsAlive()){
-					
+
 					if(player[i].checkIfAnyShipIsReady()){
 
-						//Bei allen Schiffen die laden, wird die reloadTime um einen verringert. Ist diese = 0 sind sie wieder verfügbar.
 						System.out.println(player[i].getPlayerName() + " ist an der Reihe.");
 						player[i].printPrivateField();
 
 						//Gegenspieler wählen
 
-						System.out.println("Gegen welchen Spieler möchten sie spielen?");
-						for(int j = 0; j < player.length; j++){
-							counter = j+1;
-							if(j != i){
-								if(player[j].getIsAlive()){
-									System.out.println(player[j].getPlayerName() + "\t Spieler: " + counter);
-									player[j].printPublicField();
-								}else{
-									System.out.println(player[j].getPlayerName() + "\t ist Tot");
+						if(this.player.length > 2){
+							int alivePlayer = 1;
+
+							for(int p = 0; p < this.player.length; p++){
+								if(this.player[p].getIsAlive()){
+									alivePlayer++;
+								}
+
+								if(alivePlayer > 2){
+
+									System.out.println("Gegen welchen Spieler möchten sie spielen?");
+
+									for(int j = 0; j < player.length; j++){
+										counter = j+1;
+										if(j != i){
+											if(player[j].getIsAlive()){
+												System.out.println(player[j].getPlayerName() + "\t Spieler: " + counter);
+												player[j].printPublicField();
+											}else{
+												System.out.println(player[j].getPlayerName() + "\t ist Tot");
+											}
+										}
+									}
+
+									System.out.println("Geben sie nun die Zahl ihres Wunschgegners ein.");
+
+									gegner = IO.readEnemyInt();
+									while(gegner < 0){
+										this.colorPrint.println(EPrintColor.RED, "Ungültige Eingabe! Bitte Zahl ihres Wunschgegners auswählen!");
+										gegner = IO.readEnemyInt();
+									}
+									System.out.println("Sie spielen nun gegen "+ player[gegner-1].getPlayerName());
 								}
 							}
+							//TODO was ist wenn nur noch 2 Spieler von bsp. 4 noch am leben ist??? 
 						}
-						System.out.println("Geben sie nun die Zahl ihres Wunschgegners ein.");
-						//TODO was passiert bei einer Falschen eingabe des Gegners?
-						gegner = IO.readInt();
-						System.out.println("Sie spielen nun gegen "+ player[gegner-1].getPlayerName());
+						else{
+							//Wenn es nur insgesamt zwei Spieler sind, ist automatisch der nächste Spieler der Gegner
+							if(i == 0){
+								gegner = 2;
+							}
+							else{
+								gegner = 1;
+							}
+						}
 
 						//Schiff zum angreifen wählen
 
 						System.out.println("Mit welchem Schiff möchten sie schießen?");
-						
+
 						if(player[i].getDestroyer().length > 0){
 							if(player[i].checkIfShipIsReady("D")){
 								System.out.println("Zerstörer\t 1");
@@ -82,8 +112,13 @@ private int fieldSize;
 								System.out.println("U-Boot\t\t 4");	
 							}
 						}
-						schiff = IO.readInt();
-						
+
+						schiff = IO.readShipInt();
+						while(schiff < 1){
+							this.colorPrint.println(EPrintColor.RED, "Ungültige Eingabe! Bitte wählen sie ein Schiff aus!");
+						}
+
+
 						player[gegner-1].printPublicField();
 
 						//Koordinaten wählen und schießen
@@ -119,19 +154,18 @@ private int fieldSize;
 						}
 
 						//Überprüft, ob der Gegner noch am Leben ist, wenn nicht wird isAlive auf false gesetzt.
-						
-						/*TODO Die Methode isDead hatte ich in meiner Klasse field, hat überprüft, ob Player überhaupt noch ein Schiff besitzt. Und nun? :D
-						 * kannste gerne einfach bei dem player einbauen =) oder ich bastel sie rein, wie es dir lieber ist
+
+						/*TODO ISDEAD ist in GetisAlive vorhanden
 						 */
-						
-						if(player[gegner-1].getPrivateField().isDead() == true){
-							player[gegner-1].setAlive(false);
+
+						if(player[gegner-1].getIsAlive() == false){
 							System.out.println("Herzlichen Glückwunsch, sie haben " + player[gegner-1].getPlayerName() + " besiegt.");
 						}
+						
 
 						//überprüft, ob noch Spieler am leben sind. Wenn nicht wird Spiel beendet.
 						if(ende() == 1){
-							System.out.println("Herzlichen Glückwunsch, Spieler " + player[i].getPlayerName() + " hat gewonnen.");
+							this.colorPrint.println(EPrintColor.GREEN, "Herzlichen Glückwunsch, Spieler " + player[i].getPlayerName() + " hat gewonnen.");
 							System.exit(-1);
 						}
 
@@ -141,7 +175,7 @@ private int fieldSize;
 						System.out.println("Drücken sie (s) um das Spiel zu speichern.");
 						eingabe = IO.readString();
 						while((!(eingabe.equals("n"))) || (!(eingabe.equals("x"))) ||  (!(eingabe.equals("x")))){
-							System.out.println("Sie müssen eine dieser Auswahlmöglichkeiten wählen.");
+							this.colorPrint.println(EPrintColor.RED, "Sie müssen eine dieser Auswahlmöglichkeiten wählen.");
 							eingabe = IO.readString();
 						}
 						if(eingabe.equals("n")){
@@ -162,7 +196,7 @@ private int fieldSize;
 								}
 							}
 						}
-						
+
 					}
 				}
 			}

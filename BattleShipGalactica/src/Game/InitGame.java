@@ -86,7 +86,7 @@ public class InitGame {
 					int[] koordinaten = checkPos(pos);
 
 					if(koordinaten == null){
-						IO.println("Fehler in der Eingabe! (X, Y)");
+						this.colorPrint.println(EPrintColor.RED, "Fehler in der Eingabe! (X, Y)");
 					}
 					else{
 						IO.println("Horizontal h \nVertikal v");
@@ -104,7 +104,7 @@ public class InitGame {
 							checked = true;
 						}
 						else{
-							IO.println("Schiff kann dort nicht positioniert werden!\nBitte erneut Koordinaten eingeben");
+							this.colorPrint.println(EPrintColor.RED, "Schiff kann dort nicht positioniert werden!\nBitte erneut Koordinaten eingeben");
 						}
 					}
 				}
@@ -122,7 +122,7 @@ public class InitGame {
 					int[] koordinaten = checkPos(pos);
 
 					if(koordinaten == null){
-						IO.println("Fehler in der Eingabe! (X, Y)");
+						this.colorPrint.println(EPrintColor.RED, "Fehler in der Eingabe! (X, Y)");
 					}
 					else{
 						IO.println("Horizontal h \nVertikal v");
@@ -139,7 +139,7 @@ public class InitGame {
 							checked = true;
 						}
 						else{
-							IO.println("Schiff kann dort nicht positioniert werden!\nBitte erneut Koordinaten eingeben");
+							this.colorPrint.println(EPrintColor.RED, "Schiff kann dort nicht positioniert werden!\nBitte erneut Koordinaten eingeben");
 						}
 					}
 				}
@@ -158,7 +158,7 @@ public class InitGame {
 					int[] koordinaten = checkPos(pos);
 
 					if(koordinaten == null){
-						IO.println("Fehler in der Eingabe! (X, Y)");
+						this.colorPrint.println(EPrintColor.RED,"Fehler in der Eingabe! (X, Y)");
 					}
 					else{
 						IO.println("Horizontal h \nVertikal v");
@@ -175,7 +175,7 @@ public class InitGame {
 							checked = true;
 						}
 						else{
-							IO.println("Schiff kann dort nicht positioniert werden!\nBitte erneut Koordinaten eingeben");
+							this.colorPrint.println(EPrintColor.RED, "Schiff kann dort nicht positioniert werden!\nBitte erneut Koordinaten eingeben");
 						}
 					}
 				}
@@ -194,7 +194,7 @@ public class InitGame {
 					int[] koordinaten = checkPos(pos);
 
 					if(koordinaten == null){
-						IO.println("Fehler in der Eingabe! (X, Y)");
+						this.colorPrint.println(EPrintColor.RED,"Fehler in der Eingabe! (X, Y)");
 					}
 					else{
 						IO.println("Horizontal h \nVertikal v");
@@ -211,7 +211,7 @@ public class InitGame {
 							checked = true;
 						}
 						else{
-							IO.println("Schiff kann dort nicht positioniert werden!\nBitte erneut Koordinaten eingeben");
+							this.colorPrint.println(EPrintColor.RED, "Schiff kann dort nicht positioniert werden!\nBitte erneut Koordinaten eingeben");
 						}
 					}
 				}

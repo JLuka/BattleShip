@@ -348,7 +348,7 @@ public class MatrixTools
 			/*Solange wie die Schussweite, für ist jedes Kästchen
 			 * die Koordinaten prüfen und setzen
 			 */
-			for(int z = 0; z < shootLength; z++){
+			for(int z = x; z <= shootLength; z++){
 		
 				/*Nur wenn die gewählte Koordinaten Position
 				 * kleiner ist als die Spielfeldbreite
@@ -359,8 +359,8 @@ public class MatrixTools
 					 * eine 0 = Wasser ist, so setze auf dem öffentlichen Feld 
 					 * eine 1 für getroffenes Wasser (wird dann als X ausgedruckt)
 					 */
-					if(privateField[y][x] == 0){
-						publicField[y][x] = 1;
+					if(privateField[y][z] == 0){
+						publicField[y][z] = 1;
 						hitWater++;
 					}
 					/*Ansonsten setze eine 2 für ein getroffenes Schiff
@@ -374,36 +374,36 @@ public class MatrixTools
 					 * 2 egal um welches Schiff es sich handelt		
 					 */
 					
-					else if(privateField[y][x] == 1){
-						publicField[y][x] = 2;
+					else if(privateField[y][z] == 1){
+						publicField[y][z] = 2;
 
 						for(int i = 0; i < player.getDestroyer().length; i++){
-							player.getDestroyer()[i].setCoordinatesIfHitted(x, y);
+							player.getDestroyer()[i].setCoordinatesIfHitted(z, y);
 						}
 						hitShip++;
 
 					}
-					else if(privateField[y][x] == 2){
-						publicField[y][x] = 2;
+					else if(privateField[y][z] == 2){
+						publicField[y][z] = 2;
 
 						for(int i = 0; i < player.getFrigate().length; i++){
-							player.getFrigate()[i].setCoordinatesIfHitted(x, y);
+							player.getFrigate()[i].setCoordinatesIfHitted(z, y);
 						}
 						hitShip++;
 					}
-					else if(privateField[y][x] == 3){
-						publicField[y][x] = 2;
+					else if(privateField[y][z] == 3){
+						publicField[y][z] = 2;
 
 						for(int i = 0; i < player.getCorvette().length; i++){
-							player.getCorvette()[i].setCoordinatesIfHitted(x, y);
+							player.getCorvette()[i].setCoordinatesIfHitted(z, y);
 						}
 						hitShip++;
 					}
-					else if(privateField[y][x] == 4){
-						publicField[y][x] = 2;
+					else if(privateField[y][z] == 4){
+						publicField[y][z] = 2;
 
 						for(int i = 0; i < player.getSubmarine().length; i++){
-							player.getSubmarine()[i].setCoordinatesIfHitted(x, y);
+							player.getSubmarine()[i].setCoordinatesIfHitted(z, y);
 						}
 						hitShip++;
 					}
@@ -412,7 +412,7 @@ public class MatrixTools
 		}
 		else{
 
-			for(int q = y; q < shootLength; q++){
+			for(int q = y; q <= shootLength; q++){
 				
 				/*Nur wenn die gewählte Koordinaten Position
 				 * kleiner ist als die Spielfeldlänge
@@ -423,8 +423,8 @@ public class MatrixTools
 					 * eine 0 = Wasser ist, so setze auf dem öffentlichen Feld 
 					 * eine 1 für getroffenes Wasser (wird dann als X ausgedruckt)
 					 */
-					if(privateField[y][x] == 0){
-						publicField[y][x] = 1;
+					if(privateField[q][x] == 0){
+						publicField[q][x] = 1;
 
 						hitWater++;
 					}
@@ -437,36 +437,36 @@ public class MatrixTools
 					 * 
 					 * öffentliches Feld:
 					 * 2 egal um welches Schiff es sich handelt		
-					 */else if(privateField[y][x] == 1){
-						publicField[y][x] = 2;
+					 */else if(privateField[q][x] == 1){
+						publicField[q][x] = 2;
 
 						for(int i = 0; i < player.getDestroyer().length; i++){
-							player.getDestroyer()[i].setCoordinatesIfHitted(y, x);
+							player.getDestroyer()[i].setCoordinatesIfHitted(q, x);
 						}
 
 						hitShip++;
 					}
 					else if(privateField[y][x] == 2){
-						publicField[y][x] = 2;
+						publicField[q][x] = 2;
 
 						for(int i = 0; i < player.getFrigate().length; i++){
-							player.getFrigate()[i].setCoordinatesIfHitted(y, x);
+							player.getFrigate()[i].setCoordinatesIfHitted(q, x);
 						}
 						hitShip++;
 					}
-					else if(privateField[y][x] == 3){
-						publicField[y][x] = 2;
+					else if(privateField[q][x] == 3){
+						publicField[q][x] = 2;
 
 						for(int i = 0; i < player.getCorvette().length; i++){
-							player.getCorvette()[i].setCoordinatesIfHitted(y, x);
+							player.getCorvette()[i].setCoordinatesIfHitted(q, x);
 						}
 						hitShip++;
 					}
-					else if(privateField[y][x] == 4){
-						publicField[y][x] = 2;
+					else if(privateField[q][x] == 4){
+						publicField[q][x] = 2;
 
 						for(int i = 0; i < player.getSubmarine().length; i++){
-							player.getSubmarine()[i].setCoordinatesIfHitted(y, x);
+							player.getSubmarine()[i].setCoordinatesIfHitted(q, x);
 						}
 						hitShip++;
 					}
@@ -482,7 +482,7 @@ public class MatrixTools
 
 	public void printPublicField(int[][] publicField, String name){
 
-		int[][] printMatrix = new int[publicField.length+1][publicField.length+1];
+		int[][] printMatrix = new int[publicField.length][publicField.length];
 
 
 		System.out.println("Spielfeld von \"" + name + "\"");
@@ -533,11 +533,11 @@ public class MatrixTools
 				}
 				else{
 
-					if(publicField[y-1][x-1] == 0){
+if(publicField[y][x] == 0){
 						System.out.format(leftAlignFormat," " + wave);
 
 					}
-					else if(publicField[y-1][x-1] == 1){
+					else if(publicField[y][x] == 1){
 						System.out.format(leftAlignFormat, " X" );
 					}
 					else{

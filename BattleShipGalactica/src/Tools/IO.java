@@ -37,16 +37,16 @@ public class IO {
 	}	
 
 	// Einlesen eines int
-	public static int readInt() {
-		try {
-			eingabe = input.readLine();
-			Integer string_to_int = new Integer(eingabe);
-			return string_to_int.intValue();
-		}
-		catch (Exception e) {
-			return 0;
-		}
-	}	
+		public static int readInt() {
+			try {
+				eingabe = input.readLine();
+				Integer string_to_int = new Integer(eingabe);
+				return string_to_int.intValue();
+			}
+			catch (Exception e) {
+				return 0;
+			}
+		}	
 	// Einlesen eines int
 	public static int readShipInt() {
 		try {
@@ -55,7 +55,7 @@ public class IO {
 			return string_to_int.intValue();
 		}
 		catch (Exception e) {
-			return 1;
+			return -1;
 		}
 	}
 	// Einlesen eines int

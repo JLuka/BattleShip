@@ -3,7 +3,6 @@ import Ships.Corvette;
 import Ships.Destroyer;
 import Ships.Frigate;
 import Ships.Submarine;
-import Ships.Ship;
 
 /**
  * Write a description of class MatrixTools here.
@@ -14,7 +13,6 @@ import Ships.Ship;
 
 public class Player{
 
-	//TODO implement Object from GameOptions/Round
 	private Destroyer[] destroyer;
 	private Frigate[] frigate;
 	private Corvette[] corvette;
@@ -97,6 +95,8 @@ public class Player{
 		this.isAlive = isAlive;
 	}
 
+	
+	
 	/**
 	 * getter für ein openField
 	 * @return
@@ -145,6 +145,13 @@ public class Player{
 	 */
 
 	public boolean getIsAlive(){
+		if(this.totalShips > 0){
+			this.isAlive = true;
+		}
+		else{
+			this.isAlive = false;
+		}
+		
 		return this.isAlive;
 	}
 
@@ -389,6 +396,7 @@ public class Player{
 			for(int i = 0; i < destroyer.length; i++){
 				if(destroyer[i].checkIfIsSwimming() == false){
 					System.out.println("Herzlichen Glückwunsch, du hast den Zerstörer von " + this.playerName + " versenkt.");
+					this.totalShips--;
 					return true;
 				}
 			}
@@ -396,6 +404,7 @@ public class Player{
 			for(int i = 0; i < frigate.length; i++){
 				if(frigate[i].checkIfIsSwimming() == false){
 					System.out.println("Herzlichen Glückwunsch, du hast die Frigatte von " + this.playerName + " versenkt.");
+					this.totalShips--;
 					return true;
 				}
 			}
@@ -403,6 +412,7 @@ public class Player{
 			for(int i = 0; i < corvette.length; i++){
 				if(corvette[i].checkIfIsSwimming() == false){
 					System.out.println("Herzlichen Glückwunsch, du hast die Corvette von " + this.playerName + " versenkt.");
+					this.totalShips--;
 					return true;
 				}
 			}
@@ -410,6 +420,7 @@ public class Player{
 			for(int i = 0; i < submarine.length; i++){
 				if(submarine[i].checkIfIsSwimming() == false){
 					System.out.println("Herzlichen Glückwunsch, du hast das U-Boot von " + this.playerName + " versenkt.");
+					this.totalShips--;
 					return true;
 				}
 			}
