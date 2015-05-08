@@ -351,12 +351,12 @@ public class MatrixTools implements Serializable{
 			/*Solange wie die Schussweite, für ist jedes Kästchen
 			 * die Koordinaten prüfen und setzen
 			 */
-			for(int z = x; z <= shootLength; z++){
+			for(int z = x; z <= x+shootLength; z++){
 		
 				/*Nur wenn die gewählte Koordinaten Position
 				 * kleiner ist als die Spielfeldbreite
 				 */
-				if(x < privateField.length){
+				if(z < privateField.length){
 
 					/*Wenn an dieser Position auf dem Spielfeld des Spielers
 					 * eine 0 = Wasser ist, so setze auf dem öffentlichen Feld 
@@ -415,12 +415,12 @@ public class MatrixTools implements Serializable{
 		}
 		else{
 
-			for(int q = y; q <= shootLength; q++){
+			for(int q = y; q <= y+shootLength; q++){
 				
 				/*Nur wenn die gewählte Koordinaten Position
 				 * kleiner ist als die Spielfeldlänge
 				 */
-				if(y < privateField.length){
+				if(q < privateField.length){
 					
 					/*Wenn an dieser Position auf dem Spielfeld des Spielers
 					 * eine 0 = Wasser ist, so setze auf dem öffentlichen Feld 
@@ -486,8 +486,7 @@ public class MatrixTools implements Serializable{
 	public void printPublicField(int[][] publicField, String name){
 
 		int[][] printMatrix = new int[publicField.length][publicField.length];
-
-
+		
 		System.out.println("Spielfeld von \"" + name + "\"");
 
 		for(int y = 0; y < printMatrix.length; y++){
@@ -536,7 +535,7 @@ public class MatrixTools implements Serializable{
 				}
 				else{
 
-if(publicField[y][x] == 0){
+					if(publicField[y][x] == 0){
 						System.out.format(leftAlignFormat," " + wave);
 
 					}

@@ -473,7 +473,7 @@ public class Player implements Serializable{
 				return true;
 			}
 		}
-		for(int i = 0; i < destroyer.length; i++){
+		for(int i = 0; i < corvette.length; i++){
 			if(corvette[i].isReady()){
 				return true;
 			}
