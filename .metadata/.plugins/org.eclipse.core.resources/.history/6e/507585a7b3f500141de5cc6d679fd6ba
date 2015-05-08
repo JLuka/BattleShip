@@ -36,9 +36,9 @@ public class InitGame implements Serializable{
 			this.fieldSize = player[0].getPrivateField().getSize();
 			Round rounds = new Round(this.player,this.fieldSize);
 		}
-
+		
 	}
-
+	
 	public Player[] getPlayer() {
 		return player;
 	}
@@ -64,7 +64,7 @@ public class InitGame implements Serializable{
 
 	}
 
-
+	
 
 	/**
 	 *  Positionierung der Schiffe von jedem Spieler (nacheinander)
@@ -235,23 +235,20 @@ public class InitGame implements Serializable{
 					}
 				}
 			}
-			if(i+1 < player.length){
-				System.out.println("Drücken sie (n) damit der nächste Spieler an der Reihe ist.");
-			}else{
-				System.out.println("Drücken sie (n) um das Spiel zu starten.");
-			}
+			System.out.println("Drücken sie (n) damit der nächste Spieler an der Reihe ist.");
 			
-
 			String eingabe = IO.readString();
 			while(!eingabe.equals("n")){
-				System.out.println("Sie müssen eine dieser Auswahlmöglichkeiten wählen.");
-				eingabe = IO.readString();
-			}
+			//System.out.println("Sie müssen eine dieser Auswahlmöglichkeiten wählen.");
+			//eingabe = IO.readString();
+			//}
 			if(eingabe.equals("n")){
 				for(int q = 0; q < 150; q++){
 					System.out.println("");
 				}
-
+			}
+			for(int q = 0; q < 150; q++){
+				IO.println("");
 			}
 		}
 	}

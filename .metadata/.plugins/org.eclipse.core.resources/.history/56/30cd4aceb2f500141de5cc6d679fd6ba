@@ -14,17 +14,17 @@ public class Load {
 	public Load(){
 
 	}
-	Player[] player;
 
-	public void loadGame(String name){
+	public Player[] loadGame(String name){
 		ObjectInputStream input = null;
 		
-		
+		Player[] player;
 		
 		try {
 			input = new ObjectInputStream(new BufferedInputStream(new FileInputStream(name + ".save")));
 			player = (Player[]) input.readObject();
 			input.close();
+			return player;
 
 
 		} catch (FileNotFoundException e) {
@@ -37,10 +37,6 @@ public class Load {
 			System.err.println("Datei nicht gefunden.");
 			e.printStackTrace();
 		}
+		return null;
 	}
-
-	public Player[] getPlayer() {
-		return player;
-	}
-	
 }

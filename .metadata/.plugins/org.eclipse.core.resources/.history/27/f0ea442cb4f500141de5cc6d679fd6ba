@@ -235,12 +235,8 @@ public class InitGame implements Serializable{
 					}
 				}
 			}
-			if(i+1 < player.length){
-				System.out.println("Drücken sie (n) damit der nächste Spieler an der Reihe ist.");
-			}else{
-				System.out.println("Drücken sie (n) um das Spiel zu starten.");
-			}
 			
+			System.out.println("Drücken sie (n) damit der nächste Spieler an der Reihe ist.");
 
 			String eingabe = IO.readString();
 			while(!eingabe.equals("n")){

@@ -14,33 +14,29 @@ public class Load {
 	public Load(){
 
 	}
-	Player[] player;
 
-	public void loadGame(String name){
+	public Player[] loadGame(String name){
 		ObjectInputStream input = null;
 		
-		
+		Player[] player;
 		
 		try {
 			input = new ObjectInputStream(new BufferedInputStream(new FileInputStream(name + ".save")));
 			player = (Player[]) input.readObject();
 			input.close();
+			return player;
 
 
 		} catch (FileNotFoundException e) {
-			System.err.println("Datei nicht gefunden.");
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			System.err.println("Datei nicht gefunden.");
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			System.err.println("Datei nicht gefunden.");
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return null;
 	}
-
-	public Player[] getPlayer() {
-		return player;
-	}
-	
 }

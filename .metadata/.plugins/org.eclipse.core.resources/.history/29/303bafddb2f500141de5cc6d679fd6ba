@@ -38,9 +38,4 @@ public class Load {
 			e.printStackTrace();
 		}
 	}
-
-	public Player[] getPlayer() {
-		return player;
-	}
-	
 }
