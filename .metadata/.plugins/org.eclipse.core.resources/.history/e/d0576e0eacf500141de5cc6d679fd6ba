@@ -101,6 +101,26 @@ public class Round{
 							}
 
 							//Schiff zum angreifen wählen
+
+							System.out.println("Mit welchem Schiff möchten sie schießen?");
+
+							//Gegenspieler wählen
+
+							System.out.println("Gegen welchen Spieler möchten sie spielen?");
+							for(int j = 0; j < player.length; j++){
+								counter = j+1;
+								if(j != i){
+									if(player[j].getIsAlive()){
+										System.out.println(player[j].getPlayerName() + "\t Spieler: " + counter);
+										player[j].printPublicField();
+									}else{
+										System.out.println(player[j].getPlayerName() + "\t ist Tot");
+									}
+								}
+							}
+							System.out.println("Geben sie nun die Zahl ihres Wunschgegners ein.");
+							//TODO was passiert bei einer Falschen eingabe des Gegners?
+							gegner = IO.readInt();
 							System.out.println("Sie spielen nun gegen "+ player[gegner-1].getPlayerName());
 
 							//Schiff zum angreifen wählen
@@ -194,12 +214,11 @@ public class Round{
 						System.out.println("Drücken sie (n) damit der nächste Spieler an der Reihe ist.");
 						System.out.println("Drücken sie (x) um das Spiel zu beenden ohne zu speichern.");
 						System.out.println("Drücken sie (s) um das Spiel zu speichern.");
-
 						eingabe = IO.readString();
-						//while((!(eingabe.equals("n"))) || (!(eingabe.equals("x"))) ||  (!(eingabe.equals("x")))){
-						//System.out.println("Sie müssen eine dieser Auswahlmöglichkeiten wählen.");
-						//eingabe = IO.readString();
-						//}
+						while((!(eingabe.equals("n"))) || (!(eingabe.equals("x"))) ||  (!(eingabe.equals("x")))){
+							System.out.println("Sie müssen eine dieser Auswahlmöglichkeiten wählen.");
+							eingabe = IO.readString();
+						}
 						if(eingabe.equals("n")){
 							for(int q = 0; q < 150; q++){
 								System.out.println("");
@@ -225,6 +244,7 @@ public class Round{
 			}
 		}
 	}
+
 
 
 	/**

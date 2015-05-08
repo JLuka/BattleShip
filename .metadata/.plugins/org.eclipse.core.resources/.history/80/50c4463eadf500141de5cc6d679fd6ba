@@ -194,12 +194,11 @@ public class Round{
 						System.out.println("Drücken sie (n) damit der nächste Spieler an der Reihe ist.");
 						System.out.println("Drücken sie (x) um das Spiel zu beenden ohne zu speichern.");
 						System.out.println("Drücken sie (s) um das Spiel zu speichern.");
-
 						eingabe = IO.readString();
-						//while((!(eingabe.equals("n"))) || (!(eingabe.equals("x"))) ||  (!(eingabe.equals("x")))){
-						//System.out.println("Sie müssen eine dieser Auswahlmöglichkeiten wählen.");
-						//eingabe = IO.readString();
-						//}
+						while((!(eingabe.equals("n"))) || (!(eingabe.equals("x"))) ||  (!(eingabe.equals("x")))){
+							System.out.println("Sie müssen eine dieser Auswahlmöglichkeiten wählen.");
+							eingabe = IO.readString();
+						}
 						if(eingabe.equals("n")){
 							for(int q = 0; q < 150; q++){
 								System.out.println("");
@@ -225,6 +224,7 @@ public class Round{
 			}
 		}
 	}
+
 
 
 	/**
