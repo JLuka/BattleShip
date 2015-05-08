@@ -217,6 +217,62 @@ public class Round{
 							}else{
 								for(int q = 0; q < 150; q++){
 									System.out.println("");
+									System.out.println("Drücken sie (n) damit der nächste Spieler an der Reihe ist.");
+									System.out.println("Drücken sie (x) um das Spiel zu beenden ohne zu speichern.");
+									System.out.println("Drücken sie (s) um das Spiel zu speichern.");
+									eingabe = IO.readString();
+									while((!(eingabe.equals("n"))) || (!(eingabe.equals("x"))) ||  (!(eingabe.equals("x")))){
+										System.out.println("Sie müssen eine dieser Auswahlmöglichkeiten wählen.");
+										eingabe = IO.readString();
+									}
+									if(eingabe.equals("n")){
+										for(int w = 0; w < 150; w++){
+											System.out.println("");
+										}
+									}else if(eingabe.equals("x")){
+										System.exit(0);
+									}else{
+										System.out.println("Bitte geben sie ihrem Spiel einen Namen unter dem sie es abspeichern möchten.");
+										eingabe = IO.readString();
+										save.saveGame(eingabe, player);
+										System.out.println("Wenn sie das Spiel jetzt beenden möchten, drücken sie (x) um weiter zu spielen drücken sie eine andere Taste.");
+										eingabe = IO.readString();
+										if(eingabe.equals("x")){
+											System.exit(0);
+										}else{
+											for(int w = 0; w < 150; w++){
+												System.out.println("");
+											}
+										}
+
+										System.out.println("Drücken sie (n) damit der nächste Spieler an der Reihe ist.");
+										System.out.println("Drücken sie (x) um das Spiel zu beenden ohne zu speichern.");
+										System.out.println("Drücken sie (s) um das Spiel zu speichern.");
+										eingabe = IO.readString();
+										while((!(eingabe.equals("n"))) | (!(eingabe.equals("x"))) |  (!(eingabe.equals("s")))){
+											IO.println(""+(!(eingabe.equals("n"))));
+											this.colorPrint.println(EPrintColor.RED, "Sie müssen eine dieser Auswahlmöglichkeiten wählen.");
+											eingabe = IO.readString();
+										}
+										if(eingabe.equals("n")){
+											for(int w = 0; w < 150; w++){
+												System.out.println("");
+											}
+										}else if(eingabe.equals("x")){
+											System.exit(0);
+										}else{
+											//TODO Speicherabfrage
+											System.out.println("Wenn sie das Spiel jetzt beenden möchten, drücken sie (x) um weiter zu spielen drücken sie irgendeine andere Taste.");
+											eingabe = IO.readString();
+											if(eingabe.equals("x")){
+												System.exit(0);
+											}else{
+												for(int w = 0; w < 150; w++){
+													System.out.println("");
+												}
+											}
+										}
+									}
 								}
 							}
 						}
@@ -226,52 +282,50 @@ public class Round{
 		}
 	}
 
+			/**
+			 * @param pos - die zu überprüfenden Koordinaten 
+			 * @return Gibt zurück, ob die eingegebenen Koordinaten korrekt sind
+			 */
+			private int[] checkPos(String pos){
+					try{
+						pos = pos.replaceAll("\\s+", "");
 
-	/**
-	 * @param pos - die zu überprüfenden Koordinaten 
-	 * @return Gibt zurück, ob die eingegebenen Koordinaten korrekt sind
-	 */
-	private int[] checkPos(String pos){
-		try{
-			pos = pos.replaceAll("\\s+", "");
+						String[] sKoordinaten = pos.split(",");
+						int[] iKoordinaten = new int[2];
 
-			String[] sKoordinaten = pos.split(",");
-			int[] iKoordinaten = new int[2];
+						if(sKoordinaten.length != 2){
+							return null;
+						}
+						for(int i = 0; i < 2; i++){
+							int toInt = Integer.parseInt(sKoordinaten[i]);
+							if(toInt < 0 || toInt > fieldSize){
+								return null;
+							}
+							else{
+								iKoordinaten[i] = toInt;
+							}
+						}
 
-			if(sKoordinaten.length != 2){
-				return null;
-			}
-			for(int i = 0; i < 2; i++){
-				int toInt = Integer.parseInt(sKoordinaten[i]);
+						return iKoordinaten;
+					}
+					catch(Exception e){
+						this.colorPrint.println(EPrintColor.RED, "Ungültige Eingabe");
 
-				if(toInt < 0 || toInt > fieldSize){
+					}
 					return null;
 				}
-				else{
-					iKoordinaten[i] = toInt;
+
+
+				public int ende(){
+					int counter = 0;
+					for(int i = 0; i<player.length; i++){
+						if(player[i].getIsAlive()){
+							counter++;
+						}
+					}
+					return counter;
 				}
+
+
+
 			}
-
-			return iKoordinaten;
-		}
-		catch(Exception e){
-			this.colorPrint.println(EPrintColor.RED, "Ungültige Eingabe");
-
-		}
-		return null;
-	}
-
-
-	public int ende(){
-		int counter = 0;
-		for(int i = 0; i<player.length; i++){
-			if(player[i].getIsAlive()){
-				counter++;
-			}
-		}
-		return counter;
-	}
-
-
-
-}
