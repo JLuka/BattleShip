@@ -16,7 +16,7 @@ public class InitGame implements Serializable{
 	private static final long serialVersionUID = 988834907748712441L;
 
 	private Options gameOptions;
-	private Load load;
+	private Load load = new Load();
 	private Player[] player;
 	private ColoredPrint colorPrint = new ColoredPrint();
 	private int fieldSize;

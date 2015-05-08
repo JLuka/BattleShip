@@ -10,16 +10,15 @@ import Game.Player;
 
 public class Load {
 
+	private Player[] player;
 
 	public Load(){
-
+		
 	}
-	Player[] player;
-
+	
+	
 	public void loadGame(String name){
 		ObjectInputStream input = null;
-		
-		
 		
 		try {
 			input = new ObjectInputStream(new BufferedInputStream(new FileInputStream(name + ".save")));
