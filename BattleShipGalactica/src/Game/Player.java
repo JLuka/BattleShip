@@ -1,4 +1,6 @@
 package Game;
+import java.io.Serializable;
+
 import Ships.Corvette;
 import Ships.Destroyer;
 import Ships.Frigate;
@@ -11,7 +13,12 @@ import Ships.Submarine;
  * @version 07.05.14
  */
 
-public class Player{
+public class Player implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7380768092350433487L;
 
 	private Destroyer[] destroyer;
 	private Frigate[] frigate;
@@ -59,6 +66,17 @@ public class Player{
 
 	}
 
+	
+	/**
+	 * Getter für totalShips
+	 * @return
+	 */
+
+	public int getTotalShips() {
+		return totalShips;
+	}
+	
+	
 	/**
 	 * Getter für den Playernamen
 	 * @return
@@ -404,6 +422,7 @@ public class Player{
 			for(int i = 0; i < frigate.length; i++){
 				if(frigate[i].checkIfIsSwimming() == false){
 					System.out.println("Herzlichen Glückwunsch, du hast die Frigatte von " + this.playerName + " versenkt.");
+
 					this.totalShips--;
 					return true;
 				}
@@ -413,6 +432,7 @@ public class Player{
 				if(corvette[i].checkIfIsSwimming() == false){
 					System.out.println("Herzlichen Glückwunsch, du hast die Corvette von " + this.playerName + " versenkt.");
 					this.totalShips--;
+
 					return true;
 				}
 			}
@@ -420,13 +440,17 @@ public class Player{
 			for(int i = 0; i < submarine.length; i++){
 				if(submarine[i].checkIfIsSwimming() == false){
 					System.out.println("Herzlichen Glückwunsch, du hast das U-Boot von " + this.playerName + " versenkt.");
+
 					this.totalShips--;
+
 					return true;
 				}
 			}
 		}
 		return false;
 	}
+
+	
 
 	/**
 	 * Überprüft, ob ein Spieler überhaupt ein Schiff zur verfügung hat.

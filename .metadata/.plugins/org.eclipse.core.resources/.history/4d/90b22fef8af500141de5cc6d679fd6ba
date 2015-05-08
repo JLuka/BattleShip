@@ -1,0 +1,18 @@
+package SaveGame;
+
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+
+public class Load {
+
+	public Load(){
+		
+	}
+	
+	public void loadGame(String name){
+		ObjectInputStream input = null;
+		
+		input = new ObjectInputStream(new BufferedInputStream(new FileInputStream(name + ".save")));
+	}
+}

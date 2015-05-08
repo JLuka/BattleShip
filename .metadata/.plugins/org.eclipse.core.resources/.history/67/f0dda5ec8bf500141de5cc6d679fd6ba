@@ -1,0 +1,40 @@
+package SaveGame;
+
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
+
+
+public class Load {
+	
+	private Player[] player;
+	
+	public Load(){
+		
+	}
+	
+	public void loadGame(String name){
+		ObjectInputStream input = null;
+		
+		try {
+			input = new ObjectInputStream(new BufferedInputStream(new FileInputStream(name + ".save")));
+			Player[] in = (Player[]) input.readObject();
+			input.close();
+			
+			
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}

@@ -1,0 +1,17 @@
+package SaveGame;
+
+import Game.Player;
+
+public class Save {
+	
+	private Player player;
+	
+	public Save(){
+		
+	}
+	
+	public void saveGame(String fileName, Player player){
+		player = new Player();
+		
+	}
+}

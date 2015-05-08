@@ -1,0 +1,14 @@
+package Main;
+
+import Game.InitGame;
+
+public class Main {
+	public static void main(String[] args){
+		boolean loadOrStart;
+		System.out.println("Willkommen bei BATTLESHIP special LARS edition!\n"
+				+ "um das Spiel zu beginnen, müssen Sie zunächst einmal\n"
+				+ "das Spiel konfigurieren.");
+		InitGame start = new InitGame();
+		
+	}
+}

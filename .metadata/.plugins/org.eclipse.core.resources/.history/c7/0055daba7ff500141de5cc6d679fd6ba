@@ -1,0 +1,16 @@
+package SaveGame;
+
+public class Save {
+	
+	
+	public Save(){
+		
+	}
+	
+	public void saveGame(String fileName, Player player){
+		for(int i = 0; i < player.length; i++){
+			
+		}
+		
+	}
+}

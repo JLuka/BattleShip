@@ -1,10 +1,14 @@
 package Game;
-import Tools.ColoredPrint;
-import Tools.ColoredPrint.EPrintColor;
+import java.io.Serializable;
+
 import Tools.IO;
 
 
-public class Options {
+public class Options implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6599149630474669593L;
 	private int player;
 	private String[] playerNames;
 	private int destroyer;
@@ -13,10 +17,8 @@ public class Options {
 	private int submarine;
 	private int totalShips;
 	private int battlefieldSize;
-	private ColoredPrint colorPrint;
 
 	public Options(){
-		this.colorPrint = new ColoredPrint();
 		this.totalShips = 0;
 		this.initGame();
 	}
@@ -57,9 +59,6 @@ public class Options {
 	 * Spielstart ruft die Optionen für Spieler, Spielfeld und Schiffe auf
 	 */
 	public void initGame(){
-		IO.println("Willkommen bei BATTLESHIP special LARS edition!\n"
-				+ "um das Spiel zu beginnen, müssen Sie zunächst einmal\n"
-				+ "das Spiel konfigurieren.");
 
 		initPlayer();
 		initShips();
@@ -75,13 +74,13 @@ public class Options {
 		int count = IO.readInt();
 
 		while(count < 2 || count > 6){
-			this.colorPrint.println(EPrintColor.RED, "Ungültige Eingabe. Bitte zwischen 2-6 auswählen!");
+			IO.println("Ungültige Eingabe. Bitte zwischen 2-6 auswählen!");
 			count = IO.readInt();
 		}
 
 		this.player = count;
 		this.playerNames = new String[count];
-
+		
 		for(int i = 0; i < count; i++){
 			int c = i+1;
 			boolean nameUnique = true;
@@ -96,7 +95,7 @@ public class Options {
 
 					if(this.playerNames[t] != null){
 						if(this.playerNames[t].equals(tempName)){
-							this.colorPrint.println(EPrintColor.RED, "Name schon vorhanden! Bitte erneut eingeben: ");
+							System.out.println("Name schon vorhanden! Bitte erneut eingeben: ");
 							nameUnique = false;	
 						}
 					}
@@ -108,39 +107,24 @@ public class Options {
 	}
 
 	public void initShips(){
-		System.out.println("Bitte geben sie nun die Anzahl der Schiffe ein:");
 
+		System.out.println("Bitte geben sie nun die Anzahl der Schiffe ein:");
 		while(totalShips == 0){
 			System.out.println("Zerstörer");
-			destroyer = this.checkShipCount();
-
+			destroyer = IO.readInt();
 			System.out.println("Frigatte");
-			frigate = this.checkShipCount();
-
+			frigate = IO.readInt();
 			System.out.println("Korvette");
-			corvette = this.checkShipCount();
-
+			corvette = IO.readInt();
 			System.out.println("U-Boot");
-			submarine = this.checkShipCount();
-
+			submarine = IO.readInt();
 			totalShips = destroyer + corvette + frigate + submarine;
-
 			if(totalShips == 0){
-				colorPrint.println(EPrintColor.RED, "Sie müssen mindestens ein Schiff auswählen!");
+				System.out.println("Sie müssen mindestens ein Schiff auswählen!");
 			}
 		}
 	}
-
-	private int checkShipCount(){
-		//Prüft ob die Eingabe der Schiffsanzahl eine gültige Zahl und größer/gleich 0 ist
-		int temp = IO.readShipInt();
-		while(temp < 0){	
-			this.colorPrint.println(EPrintColor.RED, "Ungültige Eingabe! Bitte geben sie eine Zahl größer/gleich 0 ein!");
-			temp = IO.readShipInt();
-		}
-		return temp;
-	}
-
+	
 	/**
 	 * 
 	 * Methode berechnet anhand der Anzahl der Schiffe, wie groß das Spielfeld sein muss und gibt diese zurück.
@@ -162,9 +146,9 @@ public class Options {
 			zahl++;
 		}
 		System.out.println("Bitte geben sie nun die Spielfeldgröße ein (mindestens " + zahl + ")");
-		this.battlefieldSize = IO.readInt();
+		battlefieldSize = IO.readInt();
 		while(this.battlefieldSize < zahl){
-			colorPrint.println(EPrintColor.RED, "Ihre Eingabe muss midestens " + zahl + " betragen. Bitte wiederholen sie ihre Eingabe!");
+			System.out.println("Ihre Eingabe muss midestens " + zahl + " betragen. Bitte wiederholen sie ihre Eingabe!");
 			this.battlefieldSize = IO.readInt();
 		}
 	}

@@ -1,0 +1,13 @@
+package SaveGame;
+
+public class Save {
+	
+	
+	public Save(){
+		
+	}
+	
+	public void saveGame(String fileName){
+		
+	}
+}

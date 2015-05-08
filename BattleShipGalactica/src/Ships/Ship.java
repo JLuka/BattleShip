@@ -1,5 +1,7 @@
 package Ships;
 
+import java.io.Serializable;
+
 /**
  * Write a description of class MatrixTools here.
  * 
@@ -7,8 +9,12 @@ package Ships;
  * @version 07.05.14
  */
 
-public class Ship{
+public class Ship implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4986167196383399769L;
 	private int shipSize;
 	private boolean isReady;
 	private int reloadTime;

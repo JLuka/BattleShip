@@ -1,23 +1,41 @@
 package Game;
 
+import java.io.Serializable;
+
+import SaveGame.Load;
 import Tools.ColoredPrint;
 import Tools.ColoredPrint.EPrintColor;
 import Tools.EShipType;
 import Tools.IO;
 
-public class InitGame {
+public class InitGame implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 988834907748712441L;
 
 	private Options gameOptions;
-
+	private Load load;
 	private Player[] player;
 	private ColoredPrint colorPrint = new ColoredPrint();
 	private int fieldSize;
 
 
-	public InitGame(){
-		this.gameOptions = new Options();
-		this.configureGame();
-		Round rounds = new Round(this.player, this.fieldSize);
+	public InitGame(boolean start){
+		if(start){
+			this.gameOptions = new Options();
+			this.configureGame();
+			Round rounds = new Round(this.player, this.fieldSize);
+			rounds.play();
+		}else{
+			System.out.println("Bitte geben sie den Namen von ihrem Spiel ein, welches sie laden möchten.");
+			String eingabe = IO.readString();
+			this.player = load.loadGame(eingabe);
+			this.fieldSize = player[0].getPrivateField().getSize();
+			Round rounds = new Round(load.loadGame(eingabe),this.fieldSize);
+		}
+		
 	}
 	
 	public Player[] getPlayer() {

@@ -1,0 +1,19 @@
+package SaveGame;
+
+import Game.Player;
+
+public class Save {
+	
+	private Player player;
+	
+	public Save(){
+		
+	}
+	
+	public void saveGame(String fileName, Player player){
+		for(int i = 0; i < player.length; i++){
+			
+		}
+		
+	}
+}

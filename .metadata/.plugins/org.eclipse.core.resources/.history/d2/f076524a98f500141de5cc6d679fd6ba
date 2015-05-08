@@ -1,0 +1,23 @@
+package Main;
+
+import Game.InitGame;
+import Tools.IO;
+
+public class Main {
+	public static void main(String[] args){
+		boolean start;
+		int eingabe;
+		System.out.println("Willkommen bei BATTLESHIP special LARS edition!\n"
+				+ "um das Spiel zu beginnen, wählen sie bitte die (1). Um ein zuvor gespeichertes Spiel zu \t"
+				+ "zu laden drücken sie bitte die (2)");
+		eingabe = IO.readInt();
+		if(eingabe == 1){
+			start = true;
+		}else if(eingabe = 2){
+			start = false;
+		}
+		
+		InitGame start = new InitGame();
+		
+	}
+}

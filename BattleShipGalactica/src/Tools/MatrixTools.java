@@ -9,8 +9,11 @@ import Game.Player;
  * @author ML
  * @version 09.12.14
  */
-public class MatrixTools
-{
+public class MatrixTools implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6993189195389536759L;
 	private final char black ='\u25A0';
 	private final char wave ='\u223C';
 	//private ColoredPrint colorPrint =  new ColoredPrint();

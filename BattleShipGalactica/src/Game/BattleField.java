@@ -1,11 +1,17 @@
 package Game;
+import java.io.Serializable;
+
 import Tools.EShipType;
 import Tools.MatrixTools;
 
 
 
-	public class BattleField {
+	public class BattleField implements Serializable{
 
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 5337826198270063377L;
 		private int[][] field;
 		private int size;
 		private boolean isBlocked;
