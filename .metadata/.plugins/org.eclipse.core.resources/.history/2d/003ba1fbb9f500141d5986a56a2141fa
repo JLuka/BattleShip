@@ -16,7 +16,7 @@ public class InitGame implements Serializable{
 	private static final long serialVersionUID = 988834907748712441L;
 
 	private Options gameOptions;
-	private Load load = new Load();
+	private Load load;
 	private Player[] player;
 	private ColoredPrint colorPrint = new ColoredPrint();
 	private int fieldSize;
@@ -31,7 +31,8 @@ public class InitGame implements Serializable{
 		}else{
 			System.out.println("Bitte geben sie den Namen von ihrem Spiel ein, welches sie laden möchten.");
 			String eingabe = IO.readString();
-			this.player = load.loadGame("eingabe");
+			load.loadGame(eingabe);
+			this.player = load.getPlayer();
 			this.fieldSize = player[0].getPrivateField().getSize();
 			Round rounds = new Round(this.player,this.fieldSize);
 		}

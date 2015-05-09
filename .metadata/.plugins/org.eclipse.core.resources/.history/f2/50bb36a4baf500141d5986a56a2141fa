@@ -10,15 +10,12 @@ import Game.Player;
 
 public class Load {
 	
-
-	private Player[] player;
-
-	public Load(){
-		
-	}
 	
+
 	public Player[] loadGame(String name){
 		ObjectInputStream input = null;
+		
+		Player[] player;
 		
 		try {
 			input = new ObjectInputStream(new BufferedInputStream(new FileInputStream(name + ".save")));
@@ -34,8 +31,7 @@ public class Load {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		return null;
 	}
-	
+	return null;
 	
 }

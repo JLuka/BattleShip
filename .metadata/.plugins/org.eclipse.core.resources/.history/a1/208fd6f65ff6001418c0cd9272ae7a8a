@@ -10,16 +10,26 @@ import Game.Player;
 
 public class Load {
 	
+	
 
+<<<<<<< Updated upstream
 	private Player[] player;
 
 	public Load(){
 		
 	}
 	
+	
+	public void loadGame(String name){
+		ObjectInputStream input = null;
+		
+=======
 	public Player[] loadGame(String name){
 		ObjectInputStream input = null;
 		
+		Player[] player;
+		
+>>>>>>> Stashed changes
 		try {
 			input = new ObjectInputStream(new BufferedInputStream(new FileInputStream(name + ".save")));
 			player = (Player[]) input.readObject();

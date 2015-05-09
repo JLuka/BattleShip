@@ -10,21 +10,18 @@ import Game.Player;
 
 public class Load {
 	
-
-	private Player[] player;
-
-	public Load(){
-		
-	}
 	
-	public Player[] loadGame(String name){
+
+	public void loadGame(String name){
 		ObjectInputStream input = null;
+		
+		Player[] player;
 		
 		try {
 			input = new ObjectInputStream(new BufferedInputStream(new FileInputStream(name + ".save")));
 			player = (Player[]) input.readObject();
 			input.close();
-			return player;
+
 
 		} catch (FileNotFoundException e) {
 			System.err.println("Datei nicht gefunden.");
@@ -34,8 +31,6 @@ public class Load {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		return null;
 	}
-	
 	
 }
