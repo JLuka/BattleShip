@@ -31,8 +31,7 @@ public class InitGame implements Serializable{
 		}else{
 			System.out.println("Bitte geben sie den Namen von ihrem Spiel ein, welches sie laden möchten.");
 			String eingabe = IO.readString();
-			load.loadGame("eingabe");
-			this.player = load.getPlayer();
+			this.player = load.loadGame("eingabe");
 			this.fieldSize = player[0].getPrivateField().getSize();
 			Round rounds = new Round(this.player,this.fieldSize);
 		}

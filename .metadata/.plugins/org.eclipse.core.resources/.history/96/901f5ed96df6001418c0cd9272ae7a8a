@@ -35,8 +35,5 @@ public class Load {
 		}
 	}
 	
-	public Player[] getPlayer() {
-		return player;
-	}
 	
 }
