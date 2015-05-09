@@ -1,38 +1,76 @@
 package Game;
 
+import java.io.Serializable;
+
+import SaveGame.Load;
 import Tools.ColoredPrint;
 import Tools.ColoredPrint.EPrintColor;
 import Tools.EShipType;
 import Tools.IO;
 
-public class InitGame {
+public class InitGame implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 988834907748712441L;
 
 	private Options gameOptions;
+	private Load load = new Load();
 	private Player[] player;
 	private ColoredPrint colorPrint = new ColoredPrint();
 	private int fieldSize;
-	
-	public InitGame(){
-		this.gameOptions = new Options();
-		this.configureGame();
+
+
+	public InitGame(boolean start){
+		if(start){
+			this.gameOptions = new Options();
+			this.configureGame();
+			Round rounds = new Round(this.player, this.fieldSize);
+			rounds.play();
+		}else{
+			System.out.println("Bitte geben sie den Namen von ihrem Spiel ein, welches sie laden möchten.");
+			String eingabe = IO.readString();
+			load.loadGame("eingabe");
+			this.player = load.getPlayer();
+			this.fieldSize = player[0].getPrivateField().getSize();
+			Round rounds = new Round(this.player,this.fieldSize);
+		}
+
+	}
+
+	public Player[] getPlayer() {
+		return player;
 	}
 
 	private void configureGame(){
-		/*TODO initplayer from Options
-		 * and BattleField
-		 */
 		this.player = new Player[this.gameOptions.getPlayer()];
 		this.fieldSize = this.gameOptions.getBattlefieldSize();
-		
-		this.setShipsToField();	
+
+
+		for(int i = 0; i < player.length; i++){
+			BattleField battlefield = new BattleField(fieldSize);
+			if(i == 0){
+				player[i] = new Player(true, this.gameOptions.getTotalShips(), this.gameOptions.getDestroyer(), 
+						this.gameOptions.getFrigate(), this.gameOptions.getCorvette(),this.gameOptions.getSubmarine(),this.gameOptions.getPlayerNames()[i], battlefield);
+			}else{
+				player[i] = new Player(false, this.gameOptions.getTotalShips(), this.gameOptions.getDestroyer(), 
+						this.gameOptions.getFrigate(), this.gameOptions.getCorvette(),this.gameOptions.getSubmarine(),this.gameOptions.getPlayerNames()[i], battlefield);
+			}
+
+		}
+
+		this.setShipsToField();
 
 	}
+
+
 
 	/**
 	 *  Positionierung der Schiffe von jedem Spieler (nacheinander)
 	 */
 	private void setShipsToField(){
-		IO.println("Der Reihe nach platziert jeder sein Schiffe!\n");
+		IO.println("Der Reihe nach platziert jeder sein/e Schiff/e!\n");
 
 		for(int i = 0; i < player.length; i++){
 
@@ -55,7 +93,6 @@ public class InitGame {
 			 * wird erneut aufgefordert das Schiff zu positionieren
 			 */
 
-
 			//ZERSTÖRER
 			for(int d = 0; d < destroyer; d++){
 				int id = d+1;
@@ -68,7 +105,7 @@ public class InitGame {
 					int[] koordinaten = checkPos(pos);
 
 					if(koordinaten == null){
-						IO.println("Fehler in der Eingabe! (X, Y)");
+						this.colorPrint.println(EPrintColor.RED, "Fehler in der Eingabe! (X, Y)");
 					}
 					else{
 						IO.println("Horizontal h \nVertikal v");
@@ -86,7 +123,7 @@ public class InitGame {
 							checked = true;
 						}
 						else{
-							IO.println("Schiff kann dort nicht positioniert werden!\nBitte erneut Koordinaten eingeben");
+							this.colorPrint.println(EPrintColor.RED, "Schiff kann dort nicht positioniert werden!\nBitte erneut Koordinaten eingeben");
 						}
 					}
 				}
@@ -104,7 +141,7 @@ public class InitGame {
 					int[] koordinaten = checkPos(pos);
 
 					if(koordinaten == null){
-						IO.println("Fehler in der Eingabe! (X, Y)");
+						this.colorPrint.println(EPrintColor.RED, "Fehler in der Eingabe! (X, Y)");
 					}
 					else{
 						IO.println("Horizontal h \nVertikal v");
@@ -121,10 +158,11 @@ public class InitGame {
 							checked = true;
 						}
 						else{
-							IO.println("Schiff kann dort nicht positioniert werden!\nBitte erneut Koordinaten eingeben");
+							this.colorPrint.println(EPrintColor.RED, "Schiff kann dort nicht positioniert werden!\nBitte erneut Koordinaten eingeben");
 						}
 					}
 				}
+
 			}
 
 			//KORVETTE
@@ -139,7 +177,7 @@ public class InitGame {
 					int[] koordinaten = checkPos(pos);
 
 					if(koordinaten == null){
-						IO.println("Fehler in der Eingabe! (X, Y)");
+						this.colorPrint.println(EPrintColor.RED,"Fehler in der Eingabe! (X, Y)");
 					}
 					else{
 						IO.println("Horizontal h \nVertikal v");
@@ -156,16 +194,17 @@ public class InitGame {
 							checked = true;
 						}
 						else{
-							IO.println("Schiff kann dort nicht positioniert werden!\nBitte erneut Koordinaten eingeben");
+							this.colorPrint.println(EPrintColor.RED, "Schiff kann dort nicht positioniert werden!\nBitte erneut Koordinaten eingeben");
 						}
 					}
 				}
+
 			}
 
 			//UBOOT
 			for(int s = 0; s < submarine; s++){
 				int id = s+1;
-				IO.println("UBoot (" + s + ")");
+				IO.println("UBoot (" + id + ")");
 				boolean checked = false;
 
 				while(checked == false){
@@ -174,7 +213,7 @@ public class InitGame {
 					int[] koordinaten = checkPos(pos);
 
 					if(koordinaten == null){
-						IO.println("Fehler in der Eingabe! (X, Y)");
+						this.colorPrint.println(EPrintColor.RED,"Fehler in der Eingabe! (X, Y)");
 					}
 					else{
 						IO.println("Horizontal h \nVertikal v");
@@ -191,10 +230,28 @@ public class InitGame {
 							checked = true;
 						}
 						else{
-							IO.println("Schiff kann dort nicht positioniert werden!\nBitte erneut Koordinaten eingeben");
+							this.colorPrint.println(EPrintColor.RED, "Schiff kann dort nicht positioniert werden!\nBitte erneut Koordinaten eingeben");
 						}
 					}
 				}
+			}
+			if(i+1 < player.length){
+				System.out.println("Drücken sie (n) damit der nächste Spieler an der Reihe ist.");
+			}else{
+				System.out.println("Drücken sie (n) um das Spiel zu starten.");
+			}
+			
+
+			String eingabe = IO.readString();
+			while(!eingabe.equals("n")){
+				System.out.println("Sie müssen eine dieser Auswahlmöglichkeiten wählen.");
+				eingabe = IO.readString();
+			}
+			if(eingabe.equals("n")){
+				for(int q = 0; q < 150; q++){
+					System.out.println("");
+				}
+
 			}
 		}
 	}
@@ -215,7 +272,7 @@ public class InitGame {
 			}
 			for(int i = 0; i < 2; i++){
 				int toInt = Integer.parseInt(sKoordinaten[i]);
-				
+
 				if(toInt < 0 || toInt > fieldSize){
 					return null;
 				}
@@ -231,22 +288,6 @@ public class InitGame {
 
 		}
 		return null;
-	}
-
-	private EShipType getShipTypeFromId(int shipId){
-		switch(shipId){
-		case 1: 
-			return EShipType.DESTROYER;
-		case 2: 
-			return EShipType.FRIGATE;
-		case 3: 
-			return EShipType.CORVETTE;
-		case 4: 
-			return EShipType.SUBMARINE;
-
-		default:
-			return null;
-		}
 	}
 
 }

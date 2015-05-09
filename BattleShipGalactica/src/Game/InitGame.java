@@ -31,7 +31,7 @@ public class InitGame implements Serializable{
 		}else{
 			System.out.println("Bitte geben sie den Namen von ihrem Spiel ein, welches sie laden möchten.");
 			String eingabe = IO.readString();
-			load.loadGame("eingabe");
+			load.loadGame(eingabe);
 			this.player = load.getPlayer();
 			this.fieldSize = player[0].getPrivateField().getSize();
 			Round rounds = new Round(this.player,this.fieldSize);
@@ -244,7 +244,7 @@ public class InitGame implements Serializable{
 
 			String eingabe = IO.readString();
 			while(!eingabe.equals("n")){
-				System.out.println("Sie müssen eine dieser Auswahlmöglichkeiten wählen.");
+				System.out.println("Sie müssen bitte (n) drücken, damit der nächste Spieler spielen kann.");
 				eingabe = IO.readString();
 			}
 			if(eingabe.equals("n")){
