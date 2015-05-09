@@ -1,0 +1,63 @@
+package Main;
+
+import javax.swing.*; 
+import java.awt.*; 
+
+public class Main_View extends JFrame{
+	
+	private JFrame frame; 
+	private JPanel welcomePan;		
+	private JPanel shownPan;		
+	
+	private Label welcome_text;
+	
+	
+	public Main_View(){
+		super();
+		this.initFrame();
+		this.initStartPanel();
+		this.start();
+		this.shownPan = new JPanel();
+		
+	}
+	
+	private void initFrame(){
+		this.frame = new JFrame("BattleShip Galactica");
+		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.frame.setSize(600, 600);
+		this.frame.setVisible(true);
+		//TODO Frame Icon hinzufügen
+	}
+	
+	private void initStartPanel(){
+		this.welcomePan = new JPanel();
+		this.welcomePan.setSize(600, 600);
+		this.welcomePan.setBackground(Color.BLACK);
+		this.welcomePan.setLayout(null);
+		this.welcomePan.setVisible(true);
+		
+		this.setWelcomeText();
+		
+		this.frame.add(this.welcomePan);
+		
+		
+	}
+	
+	private void setWelcomeText(){
+		
+		this.welcome_text = new Label();
+		this.welcome_text.setText("<HTML><BODY>Willkommen bei BATTLESHIP special LARS edition</BODY></HTML>");
+		this.welcome_text.setForeground(Color.RED);
+		this.welcome_text.setBounds(200, 100, 200, 50);;
+		
+		this.welcome_text.setVisible(true);
+		
+		this.welcomePan.add(welcome_text);
+	}
+	
+	
+	private void start(){
+		
+	}
+	
+}

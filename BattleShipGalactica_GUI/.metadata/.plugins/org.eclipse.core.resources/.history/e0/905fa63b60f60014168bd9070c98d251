@@ -1,0 +1,68 @@
+package Main;
+
+import java.awt.Color;
+
+import javax.swing.BoxLayout;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class Main_View extends JFrame{
+	
+	private JFrame frame; 
+	private JPanel welcomePan;		
+	private JPanel shownPan;		
+	
+	private JLabel welcome_text;
+	
+	
+	public Main_View(){
+		super();
+		this.initFrame();
+		this.initStartPanel();
+		this.start();
+		this.shownPan = new JPanel();
+		
+	}
+	
+	private void initFrame(){
+		this.frame = new JFrame("BattleShip Galactica");
+		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.frame.setSize(600, 600);
+		this.frame.setVisible(true);
+		//TODO Frame Icon hinzufügen
+	}
+	
+	private void initStartPanel(){
+		this.welcomePan = new JPanel();
+		this.welcomePan.setSize(600, 600);
+		this.welcomePan.setBackground(Color.green);
+		this.welcomePan.setLayout(new BoxLayout(welcomePan, BoxLayout.PAGE_AXIS));
+		this.welcomePan.setVisible(true);
+		
+		this.setWelcomeText();
+		
+		this.frame.add(this.welcomePan);
+		
+		
+	}
+	
+	private void setWelcomeText(){
+		
+		this.welcome_text = new JLabel();
+		this.welcome_text.setText("Willkommen bei BATTLESHIP special LARS edition!\n"
+				+ "um das Spiel zu beginnen, wählen sie bitte die (1). Um ein zuvor\ngespeichertes Spiel zu "
+				+ "zu laden drücken sie bitte die (2)");
+		this.welcome_text.setForeground(Color.red);
+		this.welcome_text.setSize(200, 300);
+		this.welcome_text.setVisible(true);
+		
+		this.welcomePan.add(welcome_text);
+	}
+	
+	
+	private void start(){
+		
+	}
+	
+}

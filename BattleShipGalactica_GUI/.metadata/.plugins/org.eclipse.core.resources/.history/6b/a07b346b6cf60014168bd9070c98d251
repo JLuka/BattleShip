@@ -1,0 +1,45 @@
+package Main;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import Game.InitGame;
+
+public class Main_Controler {
+
+	private boolean startNewGame = true;
+	private Main_View main_view;
+	
+	public Main_Controler(){
+		
+		main_view = new Main_View();
+		addListener();
+	}
+	
+	/**
+     * Die Listener, die wir aus den Internen Klassen generieren
+     * werden der View bekannt gemacht, sodass diese mit
+     * uns (dem Controller) kommunizieren kann
+     */
+    private void addListener(){
+        this.main_view.setNewGameSelectionListener(new StartNewGameListener());
+        this.main_view.setLoadSelectionListener(new LoadGameListener());
+     }
+
+	 /**
+     * Inneren Listener Klassen implementieren das Interface ActionListener
+     */
+    class StartNewGameListener implements ActionListener{
+        public void actionPerformed(ActionEvent e) {
+        	InitGame spielen = new InitGame(true);
+    		
+        }
+    }
+    
+    class LoadGameListener implements ActionListener{
+        public void actionPerformed(ActionEvent e) {
+        	InitGame spielen = new InitGame(false);
+        }
+    }
+
+}
