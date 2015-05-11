@@ -18,17 +18,18 @@ public class Main_View extends JFrame{
 	private int width;
 	private int height;
 	private int selection = 0;
+	private CardLayout cards;
 
 	public Main_View(int width, int height){
 		super();
 		this.width = width;
 		this.height = height;
+		this.cards = new CardLayout();
 		this.initFrame();
 		this.initStartPanel();
 		
 		this.shownPan = new JPanel();
-		
-
+	
 	}
 
 	private void initFrame(){
@@ -37,7 +38,7 @@ public class Main_View extends JFrame{
 		this.frame.setSize(this.width, this.height);
 		this.frame.setLocationRelativeTo(null);
 		this.frame.setVisible(true);
-		this.frame.setLayout(new CardLayout());
+		this.frame.setLayout(this.cards);
 		//TODO Frame Icon hinzufügen
 	}
 
@@ -48,12 +49,21 @@ public class Main_View extends JFrame{
 		this.welcomePan.setLayout(null);
 		this.welcomePan.setVisible(true);
 		
-		this.frame.add(this.welcomePan);
+		this.frame.add(this.welcomePan, "welcome");
 		
 		this.setWelcomeText();
 		this.setButtons();
 	}
 
+	private void setPanel(JPanel panel, String name){
+		this.frame.add(panel, name);
+	}
+	
+	private void changeShownPan(String cardName){
+		CardLayout cardLayout = (CardLayout) this.frame.getLayout();
+		cardLayout.show(this.frame, cardName);
+	}
+	
 	private void setWelcomeText(){
 
 		this.welcome_text = new Label();

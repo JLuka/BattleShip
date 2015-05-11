@@ -1,0 +1,50 @@
+package Game;
+
+import java.awt.GridLayout;
+
+import javax.swing.*;
+
+public class Options_View {
+
+	private JPanel optionsPan;
+	private GridLayout optionsGrid;
+	private GridLayout namesGrid;
+	private JScrollPane scrollPane;
+	private JComboBox playercmbx;
+	private JComboBox kicmbx;
+
+	public Options_View(int width, int height){
+		initPan(width, height);
+		this.optionsGrid = new GridLayout(6,2);
+	}
+
+	private void initPan(int width, int height){
+		this.optionsPan = new JPanel();
+		this.optionsPan.setSize(width, height);
+		this.optionsPan.setVisible(true);
+		this.optionsPan.setLayout(optionsGrid);
+		this.optionsPan.setBounds(50, 50, (width/2), height);
+		this.initOptions();
+	}
+
+	public JPanel getPanel(){
+		return this.optionsPan;
+	}
+
+
+	private void initOptions(){
+		JLabel player = new JLabel("Spieler Anzahl");
+		JLabel ki = new JLabel("Computer Anzahl");
+		
+		String[] count = {"2", "3", "4", "5", "6"};
+		String[] kiCount = {"1", "2", "3", "4", "5"};
+		
+		this.playercmbx  = new JComboBox(count);
+		this.kicmbx  = new JComboBox(kiCount);
+
+		this.optionsPan.add(player);
+		this.optionsPan.add(playercmbx);
+		this.optionsPan.add(ki);
+		this.optionsPan.add(kicmbx);
+	}
+}
